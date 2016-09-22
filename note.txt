@@ -1,0 +1,3 @@
+Catatan :
+  - JS Foto setelah memilih file
+  - Ubah Foto masih belum bisa

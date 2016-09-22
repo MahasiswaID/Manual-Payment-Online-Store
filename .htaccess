@@ -1,0 +1,60 @@
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/gif "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/pdf "access plus 1 month"
+ExpiresByType text/x-javascript "access plus 1 month"
+ExpiresByType application/x-shockwave-flash "access plus 1 month"
+ExpiresByType image/x-icon "access plus 1 year"
+ExpiresDefault "access plus 2 days"
+</IfModule>
+## EXPIRES CACHING ##
+
+<FilesMatch "^(web_header|web_footer|foongsey|footer|header|connect|cron)\.php$">
+        Order Deny,Allow
+        Deny from all
+        Allow from localhost
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+Options -Indexes
+Options +FollowSymLinks -MultiViews
+RewriteBase /
+ErrorDocument 404 /404.php
+
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+#RewriteCond %{QUERY_STRING} !^desktop
+#RewriteCond %{HTTP_USER_AGENT} "android|blackberry|googlebot-mobile|iemobile|iphone|ipod|#opera mobile|palmos|webos" [NC]
+#RewriteCond %{HTTP_USER_AGENT} "acs|alav|alca|amoi|audi|aste|avan|benq|bird|blac|blaz|brew|cell|cldc|cmd-" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "dang|doco|eric|hipt|inno|ipaq|java|jigs|kddi|keji|leno|lg-c|lg-d|lg-g|lge-" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT}  "maui|maxo|midp|mits|mmef|mobi|mot-|moto|mwbp|nec-|newt|noki|opwv" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "palm|pana|pant|pdxg|phil|play|pluc|port|prox|qtek|qwap|sage|sams|sany" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "sch-|sec-|send|seri|sgh-|shar|sie-|siem|smal|smar|sony|sph-|symb|t-mo" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "teli|tim-|tosh|tsm-|upg1|upsi|vk-v|voda|w3cs|wap-|wapa|wapi" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "wapp|wapr|webc|winw|winw|xda|xda-" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "up.browser|up.link|windowssce|iemobile|mini|mmp" [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} "symbian|midp|wap|phone|pocket|mobile|pda|psp" [NC]
+#RewriteRule ^$ http://m.anehdidunia.com/ [L,R=302]
+
+RewriteCond %{REQUEST_URI} ^/
+RewriteRule ^jual-([a-zA-Z0-9-]+)-murah?$ /index.php?controller=home&action=produk&url=$1 [NC,L]
+
+RewriteRule ^([a-zA-Z-]+)?$ /index.php?controller=$1 [NC,L]
+RewriteRule ^([a-zA-Z-]+)/([a-zA-Z-]+)?$ /index.php?controller=$1&action=$2 [NC,L]
+RewriteRule ^([a-zA-Z-]+)/([a-zA-Z-]+)/?$ /index.php?controller=$1&action=$2 [NC,L]
+
+
+RewriteRule ^([0-9-]+)/([0-9-]+)/([0-9a-zA-Z-]+).html?$ /index.php?controller=post&action=view&tahun=$1&bulan=$2&url=$3 [NC,L]
+
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+</IfModule>
