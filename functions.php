@@ -4,10 +4,7 @@
   //error_reporting(1);
   include_once('class/koneksi.php');
 
-  //base url define
-  //define("BASE_URL","'.BASE_URL.'");
   define("BASE_URL","/");
-  //define("cookie_name","user");
   define("cookie_name","toko_".sha1("[toko][auth][user]")."");
   define("cookie_domain",".".$_SERVER['HTTP_HOST']);
   define("UPLOAD_LOC",base_full('assets/uploads/images/'));
@@ -174,14 +171,6 @@
       return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
   }
 
-  //remove .PHP extension on form
-  function remove_extension($string=''){
-    if($string==''){
-      $string = htmlspecialchars($_SERVER['PHP_SELF']);
-    }
-    return $string;
-  }
-
   //base url function
   function base_url($string=''){
     return BASE_URL.$string;
@@ -189,11 +178,6 @@
 
   function base_full($string=''){
     return $_SERVER['DOCUMENT_ROOT'].$string;
-  }
-
-  //timestamp to string function
-  function date_to_string($date){
-    return substr($date,8,2)." ".bulan(substr($date,5,2))." ".substr($date,0,4);
   }
 
   function bulan($num){
@@ -365,26 +349,6 @@
     }else{
       return round($size);
     }
-  }
-
-  function share_btn(){
-    ?>
-    <div class='social-share'>
-      <h4>Share : </h4>
-      <div class='share-btn'>
-        <a href='https://www.facebook.com/sharer/sharer.php?u=http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>' target='_blank' class='fb'><i class='fa fa-facebook'></i> Facebook</a>
-      </div>
-      <div class='share-btn'>
-        <a href='https://twitter.com/home?status=http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>' target='_blank' class='twit'><i class='fa fa-twitter'></i> Twitter</a>
-      </div>
-      <div class='share-btn'>
-        <a href='https://plus.google.com/share?url=http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>' target='_blank' class='gplus'><i class='fa fa-google-plus'></i> Google+</a>
-      </div>
-      <!--<div class='share-btn'>
-        <a href='mailto:?to=&subject=&body=http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>' target='_blank' class='imel'><i class='fa fa-envelope'></i></a>
-      </div>-->
-    </div>
-    <?php
   }
 
   function get_client_ip() {
