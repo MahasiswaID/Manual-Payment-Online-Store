@@ -24,6 +24,18 @@ $(".tombol-order").click(function(){
   $('.small.modal').modal('show');
 });
 
+$(".hapus-gambar").click(function(){
+  if($(this).hasClass('aktif')){
+    $(this).children('input').removeAttr('checked','false');
+    $(this).removeClass('aktif');
+  }else{
+    $(this).children('input').attr('checked','true');
+    $(this).addClass('aktif');
+  }
+});
+
+$('.ui.dropdown').dropdown();
+
 $(".kotak-produk .detail-order a:last-child").click(function(){
   $('.small.modal').modal('show');
 });
@@ -75,6 +87,7 @@ $("#tambah-gambar").click(function(e){
     ' <input name=\'gambar[]\' style="display:none;" id="gambarTambah'+i+'" type=\'file\' accept="image/*"/>'+
     '<label for="gambarTambah'+i+'"><i class="edit icon"></i></label>'+
   '</div>');
+  $(".list-gambar").append($("#tambah-gambar"));
   i++;
   e.stopPropagation();
 });

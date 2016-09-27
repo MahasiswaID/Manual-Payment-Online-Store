@@ -1,4 +1,10 @@
 <?php
+  if(!empty($site->alert)){
+    echo $site->getAlert();
+  }
+?>
+
+<?php
 if(!empty($_GET['url'])){
   $url = $site->db()->real_escape_string($_GET['url']);
   $arrProduk = Produk::getProduk($url,'','',1);
@@ -29,7 +35,7 @@ if(!empty($_GET['url'])){
                 <div class="content">
                   <div class="center">
                     <label for='inputFoto' class="ui inverted button">Pilih Gambar</label>
-                    <input name='gambar_utama' accept='image/*' id='inputFoto' type='file' required style='display:none;'/>
+                    <input name='gambar_utama' accept='image/*' id='inputFoto' type='file' style='display:none;'/>
                   </div>
                 </div>
               </div>
@@ -76,21 +82,21 @@ if(!empty($_GET['url'])){
           }
         ?>
       </div>
-      <div class='field'>
+      <div class='field list-gambar'>
         <label>Gambar Lain</label>
         <?php
           $gambarTambahan = $produk->getGambarTambahan();
           foreach ($gambarTambahan as $gTambahan) {
-            //echo $gTambahan;
-            getImageResize(70,70,base_full('/kebutuhan/gambar_tambahan_produk/'),$gTambahan,$produk->getNama());
+            echo "<div class='hapus-gambar'>
+            <input name='hapus_gambar[]' value='".$gTambahan['id'].":".$gTambahan['nama']."' type='checkbox' style='display:none;'/>";
+            getImageResize(70,70,base_full('/kebutuhan/gambar_tambahan_produk/'),$gTambahan['nama'],$produk->getNama());
+            echo "</div>";
           }
         ?>
-        <div class='list-gambar'>
-        </div>
         <div id='tambah-gambar'><i class='plus icon'></i></div>
       </div>
       <div class='field'>
-        <button name='tambah' class='ui button primary' type='submit'>Tambah</button>
+        <button name='ubah' class='ui button primary' type='submit'>Update</button>
       </div>
     </div>
   </div>

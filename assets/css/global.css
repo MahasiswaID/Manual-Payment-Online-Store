@@ -323,6 +323,10 @@ nav a:hover {
     padding: 15px;
 }
 
+.list-gambar {
+    float: left;
+}
+
 .tambahin-gambar {
     display: inline-table;
     width: 70px;
@@ -334,8 +338,8 @@ nav a:hover {
     color: #666;
     cursor: pointer;
     border-radius: 3px;
-    border: 1px solid #ccc;
     position: relative;
+    float: left;
 }
 
 .tambahin-gambar label {
@@ -369,4 +373,27 @@ nav a:hover {
     background: #eaeaea;
     text-align: center;
     line-height: 70px;
+    float: left;
+}
+.hapus-gambar {
+    float: left;
+    margin: 0 5px 5px 0;
+    position: relative;
+    cursor: pointer;
+}
+.hapus-gambar:before {
+    content: "\f058";
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    font-size: 25px;
+    color: #00e0cb;
+    line-height: 70px;
+    font-family: FontAwesome !important;
+}
+.hapus-gambar.aktif::before{
+    content: "\f057";
+    color: #F44336;
 }

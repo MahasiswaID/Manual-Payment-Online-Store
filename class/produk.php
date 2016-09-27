@@ -86,9 +86,9 @@
           $produk->url = $fetch['url'];
           $produk->gambar_tambahan = array();
           if($gambarTambahan==1){
-            $gtmbh = parent::db()->query("SELECT nama_file FROM toko_gambar WHERE penentu_produk = '".parent::db()->real_escape_string($fetch['penentu'])."'");
+            $gtmbh = parent::db()->query("SELECT nama_file,id FROM toko_gambar WHERE penentu_produk = '".parent::db()->real_escape_string($fetch['penentu'])."'");
             while($ftmbh = $gtmbh->fetch_assoc()){
-              array_push($produk->gambar_tambahan,$ftmbh['nama_file']);
+              array_push($produk->gambar_tambahan,array('nama'=>$ftmbh['nama_file'],'id'=>$ftmbh['id']));
             }
           }
           array_push($arr,$produk);

@@ -29,7 +29,7 @@
               <!--<td>".safe_echo_html($prod->getBrand())."</td>-->
               <td>".safe_echo_html($prod->getKategori())."</td>
               <td>".$prod->getStatus()."</td>
-              <td><a href='".base_url('editProduk.php?url='.$prod->getUrl())."'>Edit</a> / Hapus</td>
+              <td><a href='".base_url('admin/editProduk/'.$prod->getUrl())."'>Edit</a> / Hapus</td>
             </tr>";
             $no++;
           }
