@@ -1,19 +1,21 @@
-<h2 class='header'>Tambah Produk</h2>
 <?php
-  if(!empty($site->alert)){
-    echo $site->getAlert();
-  }
+if(!empty($_GET['url'])){
+  $url = $site->db()->real_escape_string($_GET['url']);
+  $arrProduk = Produk::getProduk($url,'','',1);
+  if(!empty($arrProduk)){
+    if(!empty($arrProduk[0]->getId())){
+      $produk = $arrProduk[0];
 ?>
 <form method='POST' id='unsave-form' enctype="multipart/form-data" class='ui form'>
   <div class='ui grid'>
     <div class='eleven wide column'>
       <div class='field'>
         <label>Nama Produk</label>
-        <input name='nama_produk' placeholder='Nama produk' required maxlength="100"/>
+        <input name='nama_produk' value='<?php echo safe_echo_input($produk->getNama()); ?>' placeholder='Nama produk' required maxlength="100"/>
       </div>
       <div class='field'>
         <label>Deskripsi Produk</label>
-        <textarea class='tinyMCE' name='deskripsi_produk'></textarea>
+        <textarea class='tinyMCE' name='deskripsi_produk'><?php echo safe_echo_input($produk->getDeskripsi()); ?></textarea>
         <?php includeTinyMCE(); ?>
       </div>
     </div>
@@ -31,7 +33,7 @@
                   </div>
                 </div>
               </div>
-              <img id='imgPreview' src='<?php echo base_url('assets/images/imgplaceholder.png'); ?>'>
+              <img id='imgPreview' src='<?php echo base_url('kebutuhan/gambar_utama_produk/'.$produk->getGambarUtama()); ?>'>
             </div>
             <div class="content">
               <a class="header"><small>Gambar Utama</small></a>
@@ -45,8 +47,8 @@
       <div class='field'>
         <label>Published</label>
         <select name='status' required>
-          <option value='1' selected>Ya</option>
-          <option value='2'>Tidak</option>
+          <option value='1'<?php if($produk->getStatus()==1){echo " selected";} ?>>Ya</option>
+          <option value='2'<?php if($produk->getStatus()!=1){echo " selected";} ?>>Tidak</option>
         </select>
       </div>
       <div class='field'>
@@ -55,13 +57,13 @@
           <div class="ui label">
             Rp
           </div>
-          <input pattern='[0-9]+' placeholder='Harga Produk' required name='harga_produk'>
+          <input value='<?php echo safe_echo_input($produk->getHarga()); ?>' pattern='[0-9]+' placeholder='Harga Produk' required name='harga_produk'>
         </div>
       </div>
         <input list='brand' name='brand' type='hidden' placeholder='Nama Brand Produk' maxlength="50"/>
       <div class='field'>
         <label>Kategori Produk</label>
-        <input list='kategori' name='kategori' placeholder='Nama Brand Produk' maxlength="50"/>
+        <input value='<?php echo safe_echo_input($produk->getKategori()); ?>' list='kategori' name='kategori' placeholder='Nama Brand Produk' maxlength="50"/>
         <?php
           $koneksi = new Koneksi();
           $query = $koneksi->query("SELECT DISTINCT kategori FROM toko_produk");
@@ -76,7 +78,15 @@
       </div>
       <div class='field'>
         <label>Gambar Lain</label>
-        <div class='list-gambar'></div>
+        <?php
+          $gambarTambahan = $produk->getGambarTambahan();
+          foreach ($gambarTambahan as $gTambahan) {
+            //echo $gTambahan;
+            getImageResize(70,70,base_full('/kebutuhan/gambar_tambahan_produk/'),$gTambahan,$produk->getNama());
+          }
+        ?>
+        <div class='list-gambar'>
+        </div>
         <div id='tambah-gambar'><i class='plus icon'></i></div>
       </div>
       <div class='field'>
@@ -85,3 +95,12 @@
     </div>
   </div>
 </form>
+<?php
+    }else{
+      $site->addAlert(array('negative','Tidak dapat menemukan produk yang diinginkan'));
+    }
+  }else{
+    $site->addAlert(array('negative','Tidak dapat menemukan produk yang diinginkan'));
+  }
+}
+?>

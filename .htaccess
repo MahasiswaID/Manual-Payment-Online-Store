@@ -30,6 +30,9 @@ ErrorDocument 404 /404.php
 #RewriteCond %{HTTP_HOST} !^www\.
 #RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
+RewriteCond %{REQUEST_URI} ^/admin/editProduk/
+RewriteRule ^admin/editProduk/([a-zA-Z0-9-]+)?$ /index.php?controller=admin&action=editProduk&url=$1 [NC,L]
+
 #RewriteCond %{QUERY_STRING} !^desktop
 #RewriteCond %{HTTP_USER_AGENT} "android|blackberry|googlebot-mobile|iemobile|iphone|ipod|#opera mobile|palmos|webos" [NC]
 #RewriteCond %{HTTP_USER_AGENT} "acs|alav|alca|amoi|audi|aste|avan|benq|bird|blac|blaz|brew|cell|cldc|cmd-" [NC,OR]

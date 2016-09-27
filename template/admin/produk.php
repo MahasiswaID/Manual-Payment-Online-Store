@@ -12,7 +12,7 @@
           <th width='10'>No</th>
           <th>Nama Produk</th>
           <th>Harga</th>
-          <th>Brand</th>
+          <!--<th>Brand</th>-->
           <th>Kategori</th>
           <th>Published</th>
           <th>Edit</th>
@@ -26,7 +26,7 @@
               <td>".$no."</td>
               <td>".safe_echo_html($prod->getNama())."</td>
               <td>".toRupiah($prod->getHarga())."</td>
-              <td>".safe_echo_html($prod->getBrand())."</td>
+              <!--<td>".safe_echo_html($prod->getBrand())."</td>-->
               <td>".safe_echo_html($prod->getKategori())."</td>
               <td>".$prod->getStatus()."</td>
               <td><a href='".base_url('editProduk.php?url='.$prod->getUrl())."'>Edit</a> / Hapus</td>

@@ -50,9 +50,32 @@ function readURL(input) {
     }
 }
 
+$("#inputFoto").change(function() {
+    readURL(this);
+});
 
+$(document).bind('DOMSubtreeModified',function(){
+  $(".tambahin-gambar input").change(function() {
+    //ubahGambar(this);
+    var tmppath = URL.createObjectURL(event.target.files[0]);
+    var file = $(this).val();
+    //$(this).siblings('label').html("<img src='"+tmppath+"'/>");
+    $(this).siblings('img').attr('src',tmppath);
+    //alert(tmppath);
+    if (this.file) {
+    }
+  });
+})
+
+var i = 1;
 $("#tambah-gambar").click(function(e){
-  $('.list-gambar').append('<div class="tambahin-gambar" style="margin-bottom:5px;" ><i style="cursor:pointer;color:#f11;" class=\'close hapus icon\'></i> <input name=\'gambar[]\' type=\'file\'/></div>');
+  $('.list-gambar').append('<div class="tambahin-gambar" style="margin-bottom:5px;">'+
+    '<!--<i style="cursor:pointer;color:#f11;" class=\'close hapus icon\'></i>-->'+
+    '<img style="height:70px;width:70px;" src="/assets/images/phsmall.png"/>'+
+    ' <input name=\'gambar[]\' style="display:none;" id="gambarTambah'+i+'" type=\'file\' accept="image/*"/>'+
+    '<label for="gambarTambah'+i+'"><i class="edit icon"></i></label>'+
+  '</div>');
+  i++;
   e.stopPropagation();
 });
 
@@ -66,10 +89,6 @@ $(document).ready(function(){
     $('#myTable').DataTable();
 });
 
-
-$("#inputFoto").change(function() {
-    readURL(this);
-});
 
 $('.ui.radio.checkbox')
   .checkbox()

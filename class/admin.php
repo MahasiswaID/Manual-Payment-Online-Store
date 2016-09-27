@@ -159,4 +159,20 @@
       $this->setCustomTitle("Manage Produk");
       include_class('produk');
     }
+
+    public function editProduk(){
+      //$this->setCustomTitle("Edit Produk");
+      include_class('produk');
+      if(!empty($_GET['url'])){
+        $url = $this->db()->real_escape_string($_GET['url']);
+        $arrProduk = Produk::getProduk($url);
+        if(!empty($arrProduk)){
+          $this->setCustomTitle("Edit Produk ".$arrProduk[0]->getNama());
+        }else{
+          $this->setCustomTitle("Produk tidak ditemukan");
+        }
+      }else{
+        $this->setCustomTitle("Produk tidak ditemukan");
+      }
+    }
   }

@@ -6,7 +6,7 @@
     }
 
     public function error(){
-      setCustomTitle("Halaman tidak ditemukan");
+      $this->setCustomTitle("Halaman tidak ditemukan");
     }
 
     public static function getKategoriBrand(){

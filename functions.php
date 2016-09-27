@@ -240,7 +240,7 @@
     imageResize($newWidth,$newHeight,$folderPath, $fileName);
     $lPath = strlen($_SERVER['DOCUMENT_ROOT'].base_url());
     $lfPath = strlen($folderPath);
-    if(file_exists(base_full(substr($folderPath,$lPath,$lfPath)."resize/".$newWidth."x".$newHeight."/".$fileName))){
+    if(file_exists($folderPath."/resize/".$newWidth."x".$newHeight."/".$fileName)){
       echo "<img width='".$newWidth."' alt='".safe_echo_html($altTitle)."' title='".safe_echo_html($altTitle)."' height='".$newHeight."' src='".base_url(substr($folderPath,$lPath,$lfPath)."resize/".$newWidth."x".$newHeight."/".$fileName)."'/>";
     }
   }
