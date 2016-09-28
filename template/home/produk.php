@@ -1,5 +1,5 @@
 <?php
-  $url = $_GET['url'];
+  $url = $site->getSiteData();
   $produk = Produk::getProduk($url,'','',1);
   if(!empty($produk)){
     ?>
@@ -14,8 +14,8 @@
           ".returnImageResize(80,80,'kebutuhan/gambar_utama_produk/',$produk[0]->getGambarUtama(),safe_echo_html($produk[0]->getNama()))."
         </div>";
         foreach ($produk[0]->getGambarTambahan() as $glain) {
-          echo "<div class='gambar' srcnya='kebutuhan/gambar_tambahan_produk/".$glain."'>
-            ".returnImageResize(80,80,'kebutuhan/gambar_tambahan_produk/',$glain,safe_echo_html($produk[0]->getNama()))."
+          echo "<div class='gambar' srcnya='kebutuhan/gambar_tambahan_produk/".$glain['nama']."'>
+            ".returnImageResize(80,80,'kebutuhan/gambar_tambahan_produk/',$glain['nama'],safe_echo_html($produk[0]->getNama()))."
           </div>";
         }
       ?>

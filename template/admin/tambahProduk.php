@@ -1,9 +1,4 @@
 <h2 class='header'>Tambah Produk</h2>
-<?php
-  if(!empty($site->alert)){
-    echo $site->getAlert();
-  }
-?>
 <form method='POST' id='unsave-form' enctype="multipart/form-data" class='ui form'>
   <div class='ui grid'>
     <div class='eleven wide column'>

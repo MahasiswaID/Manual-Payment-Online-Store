@@ -13,7 +13,7 @@
       <span class="text">Pengaturan</span>
       <i class="dropdown icon"></i>
       <div class="menu">
-        <a class="item" href='#!'>Home Goods</a>
+        <a class="item" href='<?php echo base_url('admin/pengaturansitus'); ?>'>Info Situs</a>
         <a class="item" href='#!'>Bedroom</a>
       </div>
     </div>
@@ -37,3 +37,9 @@
       <i class="right chevron icon divider"></i>
       <div class="active section"><?php echo safe_echo_html($site->getCustomTitle()); ?></div>
     </div>
+
+    <?php
+      if(!empty($site->alert)){
+        echo $site->getAlert();
+      }
+    ?>

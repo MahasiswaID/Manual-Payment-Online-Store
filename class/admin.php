@@ -162,11 +162,13 @@
       include_class('produk');
     }
 
-    public function editProduk(){
+    public function editProduk($url){
       //$this->setCustomTitle("Edit Produk");
+      //echo $url;
       include_class('produk');
-      if(!empty($_GET['url'])){
-        $url = $this->db()->real_escape_string($_GET['url']);
+      if(!empty($url)){
+        $url = $this->db()->real_escape_string($url);
+        $this->setSiteData($url);
         $arrProduk = Produk::getProduk($url);
         if(!empty($arrProduk)){
           $this->setCustomTitle("Edit Produk ".$arrProduk[0]->getNama());
@@ -301,10 +303,22 @@
             }
           }
         }else{
+          $this->addAlert(array('negative','Produk tidak ditemukan'));
           $this->setCustomTitle("Produk tidak ditemukan");
         }
       }else{
         $this->setCustomTitle("Produk tidak ditemukan");
       }
     }
+
+    public function pengaturansitus(){
+      $this->setCustomTitle("Pengaturan Situs");
+    }
+
+    public function deleteProduk($url='error'){
+      $url = $this->db()->real_escape_string($url);
+      $query = $this->db()->query("DELETE FROM toko_produk WHERE url = '$url'");
+      header("Location:".base_url('admin/produk'));
+    }
+
   }

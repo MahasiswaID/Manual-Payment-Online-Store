@@ -12,7 +12,8 @@
     public static function getKategoriBrand(){
       $kategori = array();
       $brand = array();
-      $qkat = parent::db()->query("SELECT DISTINCT brand,kategori FROM toko_produk");
+      $koneksi = new Koneksi();
+      $qkat = $koneksi->db()->query("SELECT DISTINCT brand,kategori FROM toko_produk");
       while($fetch = $qkat->fetch_assoc()){
         array_push($kategori,$fetch['kategori']);
         array_push($brand,$fetch['brand']);
@@ -31,19 +32,16 @@
       return $hasil;
     }
 
-    public function produk(){
-      if(!empty($_GET['url'])){
-        $url = $_GET['url'];
+    public function produk($url='error'){
         include_class('produk');
         $prod = Produk::getProduk($url);
+        $this->setSiteData($url);
         if(!empty($prod)){
           $this->setInfoProduk($prod[0]);
           $this->setCustomTitle(safe_echo_html("Jual ".$prod[0]->getNama()." Murah"));
         }else{
           $this->setCustomTitle('Produk tidak ditemukan');
+          $this->addAlert(array('negative','Produk tidak ditemukan'));
         }
-      }else{
-        die(header("Location:".base_url()));
-      }
     }
   }

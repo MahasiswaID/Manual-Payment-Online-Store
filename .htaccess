@@ -30,8 +30,8 @@ ErrorDocument 404 /404.php
 #RewriteCond %{HTTP_HOST} !^www\.
 #RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
-RewriteCond %{REQUEST_URI} ^/admin/editProduk/
-RewriteRule ^admin/editProduk/([a-zA-Z0-9-]+)?$ /index.php?controller=admin&action=editProduk&url=$1 [NC,L]
+#RewriteCond %{REQUEST_URI} ^/admin/editProduk/
+#RewriteRule ^admin/editProduk/([a-zA-Z0-9-]+)?$ /index.php?controller=admin&action=editProduk&url=$1 [NC,L]
 
 #RewriteCond %{QUERY_STRING} !^desktop
 #RewriteCond %{HTTP_USER_AGENT} "android|blackberry|googlebot-mobile|iemobile|iphone|ipod|#opera mobile|palmos|webos" [NC]
@@ -47,14 +47,17 @@ RewriteRule ^admin/editProduk/([a-zA-Z0-9-]+)?$ /index.php?controller=admin&acti
 #RewriteRule ^$ http://m.anehdidunia.com/ [L,R=302]
 
 RewriteCond %{REQUEST_URI} ^/
-RewriteRule ^jual-([a-zA-Z0-9-]+)-murah?$ /index.php?controller=home&action=produk&url=$1 [NC,L]
-
-RewriteRule ^([a-zA-Z-]+)?$ /index.php?controller=$1 [NC,L]
-RewriteRule ^([a-zA-Z-]+)/([a-zA-Z-]+)?$ /index.php?controller=$1&action=$2 [NC,L]
-RewriteRule ^([a-zA-Z-]+)/([a-zA-Z-]+)/?$ /index.php?controller=$1&action=$2 [NC,L]
+RewriteRule ^jual-([a-zA-Z0-9-]+)-murah?$ /index.php?params=home/produk/$1 [NC,L]
 
 
-RewriteRule ^([0-9-]+)/([0-9-]+)/([0-9a-zA-Z-]+).html?$ /index.php?controller=post&action=view&tahun=$1&bulan=$2&url=$3 [NC,L]
+RewriteRule ^([a-zA-Z/-]+)?$ /index.php?params=$1 [NC,L]
+
+#RewriteRule ^([a-zA-Z-]+)?$ /index.php?controller=$1 [NC,L]
+#RewriteRule ^([a-zA-Z-]+)/([a-zA-Z-]+)?$ /index.php?controller=$1&action=$2 [NC,L]
+#RewriteRule ^([a-zA-Z-]+)/([a-zA-Z-]+)/?$ /index.php?controller=$1&action=$2 [NC,L]
+
+
+#RewriteRule ^([0-9-]+)/([0-9-]+)/([0-9a-zA-Z-]+).html?$ /index.php?controller=post&action=view&tahun=$1&bulan=$2&url=$3 [NC,L]
 
 #RewriteCond %{REQUEST_FILENAME} !-d
 #RewriteCond %{REQUEST_FILENAME} !-f

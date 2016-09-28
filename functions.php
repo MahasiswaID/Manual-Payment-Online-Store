@@ -1,7 +1,11 @@
 <?php
   ob_start();
   session_start();
-  //error_reporting(1);
+
+  error_reporting(E_ALL);
+  ini_set("log_errors", true);
+  ini_set("error_log", "/var/www/html/hijab/error_file.log");
+
   include_once('class/koneksi.php');
 
   define("BASE_URL","/");

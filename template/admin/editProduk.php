@@ -1,12 +1,5 @@
 <?php
-  if(!empty($site->alert)){
-    echo $site->getAlert();
-  }
-?>
-
-<?php
-if(!empty($_GET['url'])){
-  $url = $site->db()->real_escape_string($_GET['url']);
+  $url = $site->db()->real_escape_string($data);
   $arrProduk = Produk::getProduk($url,'','',1);
   if(!empty($arrProduk)){
     if(!empty($arrProduk[0]->getId())){
@@ -108,5 +101,4 @@ if(!empty($_GET['url'])){
   }else{
     $site->addAlert(array('negative','Tidak dapat menemukan produk yang diinginkan'));
   }
-}
 ?>

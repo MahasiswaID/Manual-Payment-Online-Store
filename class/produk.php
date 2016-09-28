@@ -58,6 +58,7 @@
 
     public static function getProduk($url='',$limits='',$start='',$gambarTambahan = 0){
       $arr = array();
+      $koneksi = new Koneksi();
       if(!empty($limits)){
           $limits = 'LIMIT '.$limits;
           if(!empty($start)){
@@ -65,12 +66,12 @@
           }
       }
       if(!empty($url)){
-        $url = parent::db()->real_escape_string($url);
+        $url = $koneksi->db()->real_escape_string($url);
         $query = "SELECT * FROM toko_produk WHERE url = '$url'";
       }else{
         $query = "SELECT * FROM toko_produk ORDER BY id DESC ".$limits;
       }
-      $q = parent::db()->query($query);
+      $q = $koneksi->db()->query($query);
       if($q->num_rows!=0){
         while($fetch = $q->fetch_assoc()){
           $produk = new Produk();
@@ -86,7 +87,7 @@
           $produk->url = $fetch['url'];
           $produk->gambar_tambahan = array();
           if($gambarTambahan==1){
-            $gtmbh = parent::db()->query("SELECT nama_file,id FROM toko_gambar WHERE penentu_produk = '".parent::db()->real_escape_string($fetch['penentu'])."'");
+            $gtmbh = $koneksi->db()->query("SELECT nama_file,id FROM toko_gambar WHERE penentu_produk = '".$koneksi->db()->real_escape_string($fetch['penentu'])."'");
             while($ftmbh = $gtmbh->fetch_assoc()){
               array_push($produk->gambar_tambahan,array('nama'=>$ftmbh['nama_file'],'id'=>$ftmbh['id']));
             }
