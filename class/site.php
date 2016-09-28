@@ -72,6 +72,26 @@ class Site{
     return $hasil;
   }
 
+  public function getLogo(){
+    return $this->logo;
+  }
+
+  public function setLogo($logo){
+    $this->logo = $logo;
+  }
+
+  public function setTotal($total){
+    $this->totalPost = $total;
+  }
+
+  public function setTagline($tl){
+    $this->tagline = $tl;
+  }
+
+  public function setKeywords($key){
+    $this->keywords = $key;
+  }
+
   public function setInfoProduk($prod){
     $this->infoProduk = $prod;
   }

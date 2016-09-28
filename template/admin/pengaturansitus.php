@@ -1,5 +1,5 @@
 <h2 class='header'>Pengaturan Situs</h2>
-<form class='ui form' method='POST'>
+<form class='ui form' method='POST' enctype="multipart/form-data">
 
   <div class='ui grid'>
     <div class='four wide column'>
@@ -11,11 +11,21 @@
                 <div class="content">
                   <div class="center">
                     <label for='inputFoto' class="ui inverted button">Pilih Gambar</label>
-                    <input name='logo' accept='image/*' id='inputFoto' type='file' required style='display:none;'/>
+                    <input name='gambar_utama' accept='image/*' id='inputFoto' type='file' style='display:none;'/>
                   </div>
                 </div>
               </div>
-              <img id='imgPreview' src='<?php echo base_url('assets/images/imgplaceholder.png'); ?>'>
+              <?php
+                if(!empty($site->getLogo())){
+                  ?>
+                    <img id='imgPreview' src='<?php echo base_url('kebutuhan/gambar_utama_produk/'.$site->getLogo()); ?>'>
+                  <?php
+                }else{
+                  ?>
+                    <img id='imgPreview' src='<?php echo base_url('assets/images/imgplaceholder.png'); ?>'>
+                  <?php
+                }
+              ?>
             </div>
             <div class="content">
               <a class="header"><small>Logo</small></a>
@@ -49,7 +59,7 @@
         </div>
         <div class='field'>
           <label>Tampilan Produk</label>
-          <input type='number' name='total' value='<?php echo safe_echo_input($site->getTotalPost()); ?>'>
+          <input type='number' min='1' max='50' name='total' value='<?php echo safe_echo_input($site->getTotalPost()); ?>'>
         </div>
       </div>
       <div class='field'>

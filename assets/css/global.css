@@ -63,9 +63,16 @@ header h4 {
 }
 
 header {
-    padding: 20px;
-    text-align: center;
-    color: #ea2d6d;
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+nav {
+    background: #d3a953;
+}
+
+#paling-atas {
+    padding: 10px 0;
 }
 
 img {
@@ -78,6 +85,12 @@ img {
     box-shadow: 0px -1px 1px #dedede inset !important;
     border-color: #efefef !important;
 }
+
+.ui.container{
+    max-width: 960px !important;
+}
+
+
 
 /*.ui.form input:invalid,.ui.form select:invalid {
     box-shadow: 0px -1px 0px #ff1111 inset !important;
@@ -139,12 +152,17 @@ img {
     background: #fff;
     margin: 0 10px 20px 10px;
     overflow: hidden;
-    box-shadow: 2px 2px 3px #e2e2e2;
-    /* border: 1px solid #e8e8e8; */
+    /*box-shadow: 2px 2px 3px #e2e2e2;*/
+    border: 1px solid #e8e8e8;
 }
 
 .kotak-produk .nama-harga {
     padding: 10px;
+    background: #f1f1f1;
+}
+
+.dalam .gambar * {
+    display: block;
 }
 
 .kotak-produk .nama-harga .nama {
@@ -154,7 +172,7 @@ img {
 }
 
 .kotak-produk .nama-harga .nama a {
-    color: #E91E63;
+    color: #d3a953;
 }
 
 .kotak-produk .nama-harga .harga {
@@ -176,7 +194,7 @@ img {
 }
 
 .kotak-produk .detail-order a:last-child {
-    background: #ea2d6d;
+    background: #d3a953;
     color: #fff;
 }
 
@@ -223,11 +241,11 @@ img {
 
 .detil-produk > h1.header {
     text-align: center;
-    color: #ea2d6d;
+    color: #d3a953;
 }
 
 .beli-produk {
-    background: #ea2d6d;
+    background: #d3a953;
     padding: 15px;
     margin: 0 -15px;
     color: #fff;
@@ -287,7 +305,7 @@ img {
 .sidebar-produk .tombol-order {
     display: block;
     margin-top: 23px;
-    background: #ea2d6d;
+    background: #d3a953;
     color: #fff;
     border-radius: 3px;
     font-weight: bold;
@@ -312,12 +330,14 @@ img {
     border-top: 1px solid #dedede;
 }
 nav a {
-    color: #a9b4b9;
+    color: #ffffff;
     display: inline-block;
-    margin-right: 15px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-family: 'Pacifico';
 }
 nav a:hover {
-    color: #ea2d6d;
+    color: #333;
 }
 .widget {
     padding: 15px;
@@ -396,4 +416,13 @@ nav a:hover {
 .hapus-gambar.aktif::before{
     content: "\f057";
     color: #F44336;
+}
+
+#image-slider {
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.slide-image {
+    float: left;
 }

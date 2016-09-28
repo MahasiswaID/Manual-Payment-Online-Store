@@ -249,7 +249,7 @@
     }
   }
 
-  function returnImageResize($newWidth,$newHeight,$folderPath,$fileName,$altTitle){
+  function returnImageResize($newWidth,$newHeight,$folderPath,$fileName,$altTitle=''){
     imageResize($newWidth,$newHeight,$folderPath, $fileName);
     $lPath = strlen($_SERVER['DOCUMENT_ROOT'].base_url());
     $lfPath = strlen($folderPath);

@@ -313,6 +313,80 @@
 
     public function pengaturansitus(){
       $this->setCustomTitle("Pengaturan Situs");
+      if(isset($_POST['simpan'])){
+        if(!empty($_POST['nama']) && !empty($_POST['total'])){
+          $tagline = $deskripsi = $keywords = "";
+          $nama = $this->db()->real_escape_string($_POST['nama']);
+          $total = (int)$_POST['total'];
+
+          $logo = $this->getLogo();
+
+          if($total < 1){
+            $total = 1;
+          }
+
+
+          if(!empty($_POST['tagline'])){
+            $tagline = $this->db()->real_escape_string($_POST['tagline']);
+          }
+
+          if(!empty($_POST['deskripsi'])){
+            $deskripsi = $this->db()->real_escape_string($_POST['deskripsi']);
+          }
+
+          if(!empty($_POST['keywords'])){
+            $keywords = $this->db()->real_escape_string($_POST['keywords']);
+          }
+
+          $uploadOk = 1;
+          if(!empty($_FILES['gambar_utama']['name'])){
+            $targetFolder = base_full('kebutuhan/gambar_utama_produk/');
+            if(!file_exists($targetFolder)){
+              mkdir($targetFolder,0777);
+            }
+            $extensiFile = pathinfo(basename($_FILES['gambar_utama']['name']),PATHINFO_EXTENSION);
+            $namaFile = sha1(rand(1,9).rand(1,9).rand(1,9).date("Y-m-d h:i:s").rand(1,9).rand(1,9).rand(1,9)).'.'.$extensiFile;
+            $targetFile = $targetFolder.$namaFile;
+            $check = getimagesize($_FILES['gambar_utama']['tmp_name']);
+            if($check==false){
+              $this->addAlert(array('negative','File yang diupload bukan berbentuk gambar'));
+              $uploadOk = 0;
+            }
+            if($_FILES['gambar_utama']['size']>2000000){
+              $this->addAlert(array('negative','Ukuran file yang diupload terlalu besar'));
+              $uploadOk = 0;
+            }
+            if($extensiFile!='jpg' && $extensiFile!='JPG' && $extensiFile!='png' && $extensiFile!='PNG' && $extensiFile!='jpeg' && $extensiFile!='JPEG'){
+              $this->addAlert(array('negative','FIle logo yang diupload bukan berextensi jpg, jpeg atau png'));
+              $uploadOk = 0;
+            }
+
+            if($uploadOk==1){
+              if(move_uploaded_file($_FILES['gambar_utama']['tmp_name'],$targetFile)){
+                $logo = $namaFile;
+              }else{
+                $this->addAlert(array('negative','Maaf logo baru gagal diupload'));
+                $uploadOk = 0;
+              }
+            }
+          }
+
+          $qurs = $this->db()->query("INSERT INTO toko_setting (title,description,keywords,tagline,total,logo) VALUES('$nama','$deskripsi','$keywords','$tagline','$total','$logo')");
+          if($qurs){
+            $this->setTitle($nama);
+            $this->setDescription($deskripsi);
+            $this->setKeywords($keywords);
+            $this->setTagline($tagline);
+            $this->setTotal($total);
+            $this->setLogo($logo);
+            $this->addAlert(array('positive','Berhasil menyimpan pengaturan'));
+          }else{
+            $this->addAlert(array('negative','Gagal menyimpan pengaturan'));
+          }
+
+        }
+      }
+      $this->setSiteData($this);
     }
 
     public function deleteProduk($url='error'){

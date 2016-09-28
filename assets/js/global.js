@@ -1,25 +1,3 @@
-/*$('.ui-form'){
-  .form({
-    fields: {
-      name: {
-        identifier: 'nama',
-        rules: [
-          {
-            type: 'empty',
-            prompt: 'Masukkan nama'
-          }
-        ]
-      }
-    }
-  })
-}*/
-
-/*$("#unsave-form").areYouSure({
-  message: 'Ada beberapa perubahan yang belum disimpan. Yakin ingin keluar dari halaman ini?'
-});*/
-
-//$("#imgPreview img").height($("#imgPreview").width());
-
 $(".tombol-order").click(function(){
   $('.small.modal').modal('show');
 });
@@ -50,6 +28,48 @@ $('.special.cards .image').dimmer({
 
 $(window).bind("load resize",function(){
   $("#imgPreview").height($("#imgPreview").width());
+  var banyakSlide = $(".slide-image").length;
+  var lebarSlide = $("#image-slider").width();
+  var ngeslide = 0;
+
+  setInterval(function(){
+    keKanan();
+  },3000);
+
+  function keKanan(){
+    if(-ngeslide < ((banyakSlide-1)*lebarSlide)){
+      ngeslide -= lebarSlide;
+    }else{
+      ngeslide = 0;
+    }
+    $("#image-slider .dalam").animate({
+      marginLeft : ngeslide
+    });
+  }
+
+  function keKiri(){
+    if(ngeslide == 0){
+      ngeslide = -(banyakSlide-1)*lebarSlide;
+    }else{
+      ngeslide += lebarSlide;
+    }
+    $("#image-slider .dalam").animate({
+      marginLeft : ngeslide
+    });
+  }
+
+  $("#kekanan").click(function(){
+    keKanan();
+  });
+
+  $("#kekiri").click(function(){
+    keKiri();
+  });
+
+  $(".slide-image img").width($("#image-slider").width());
+  $("#image-slider .dalam").width(banyakSlide * $("#image-slider").width());
+
+
 });
 
 function readURL(input) {

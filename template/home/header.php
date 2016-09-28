@@ -1,19 +1,29 @@
 <?php
   include_once('template/header.php');
 ?>
-  <div class='ui container home-container'>
+  <header>
+    <div id='paling-atas'>
+      <div class='ui container'>
+        <div class='kiri'>
+          <img src='assets/images/nayys_sm.jpg'/>
+        </div>
+        <div class='kanan'>
+
+        </div>
+      </div>
+    </div>
     <nav>
-      <a href='<?php echo base_url(); ?>'>Home</a>
-      <a href='#!'>Menu 1</a>
-      <a href='#!'>Menu 2</a>
-      <a href='#!'>Menu 3</a>
-      <a href='#!'>Menu 4</a>
+      <div class='ui container'>
+        <a href='<?php echo base_url(); ?>'>Home</a>
+        <a href='#!'>Menu 1</a>
+        <a href='#!'>Menu 2</a>
+        <a href='#!'>Menu 3</a>
+        <a href='#!'>Menu 4</a>
+      </div>
     </nav>
-    <header>
-      <h1><?php echo safe_echo_html($site->getTitle()); ?></h1>
-      <h4><?php echo safe_echo_html($site->getTagline()); ?></h4>
-    </header>
-    <div class='ui grid'>
+  </header>
+  <div class='ui container home-container'>
+    <!--<div class='ui grid'>
       <div class='four wide column'>
         <div id='sidebar'>
           <?php
@@ -59,4 +69,4 @@
           </div>
         </div>
       </div>
-      <div class='twelve wide column'>
+      <div class='twelve wide column'>-->
