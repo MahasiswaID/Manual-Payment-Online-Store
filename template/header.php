@@ -67,3 +67,63 @@
 
   </head>
   <body>
+    <div class='ui container home-container'>
+      <header>
+        <div id='paling-atas'>
+          <div class='kiri'>
+            <img width='250' src='<?php echo base_url('assets/images/nayys_new.jpg'); ?>'/>
+          </div>
+          <div class='kanan'>
+
+          </div>
+        </div>
+        <nav>
+          <a class='aktif' href='<?php echo base_url(); ?>'>Home</a>
+          <form method='POST' action='<?php echo base_url('search'); ?>'>
+            <?php
+              $listKategori = Site::getKategoriBrand()['kategori'];
+              foreach ($listKategori as $kategori) {
+                echo "<button type='submit' name='kategori' value='".safe_echo_html($kategori)."' href='#!'>".safe_echo_html($kategori)."</button>";
+              }
+            ?>
+          </form>
+        </nav>
+      </header>
+      <div class='ui grid'>
+        <div class='four wide column'>
+          <div id='sidebar'>
+            <?php
+              if(!empty($site->getInfoProduk())){
+                $infoProduk = $site->getInfoProduk();
+                echo "<div class='sidebar-produk'>
+                  <div class='harga'>".toRupiah($infoProduk->getHarga())."</div>
+                  <a class='tombol-order' href='#!'>Order Sekarang</a>
+                </div>
+                <div class='kat-brand'>
+                  <table>
+                    <tbody>
+                      <tr><td>Brand</td><td>".safe_echo_html($infoProduk->getBrand())."</td></tr>
+                      <tr><td>Kategori</td><td>".safe_echo_html($infoProduk->getKategori())."</td></tr>
+                    </tbody>
+                  </table>
+                </div>";
+              }
+            ?>
+            <!--<div class='widget'>
+              <h4 class='header'>Kategori</h4>
+              <form method='GET' class='ui form form-pencarian'>
+                  <?php
+                  /*$listKategori = Home::getKategoriBrand()['kategori'];
+                  $no = 1;
+                  foreach ($listKategori as $kategori) {
+                    echo "<div class='inline field'><input type='checkbox' value='".safe_echo_html($kategori)."' id='kat".$no."'/> <label for='kat".$no."'>".safe_echo_html($kategori)."</label></div>";
+                    $no++;
+                  }*/
+                  ?>
+                  <input class='kat' value='' type='hidden'/>
+                <button type='submit' class='ui button primary' name='submit'>Cari</button>
+              </form>
+            </div>-->
+          </div>
+        </div>
+        <div class='twelve wide column'>

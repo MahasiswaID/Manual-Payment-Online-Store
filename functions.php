@@ -250,13 +250,13 @@
   }
 
   function returnImageResize($newWidth,$newHeight,$folderPath,$fileName,$altTitle=''){
-    imageResize($newWidth,$newHeight,$folderPath, $fileName);
+    imageResize($newWidth,$newHeight,base_full($folderPath), $fileName);
     $lPath = strlen($_SERVER['DOCUMENT_ROOT'].base_url());
     $lfPath = strlen($folderPath);
     if(file_exists(base_full($folderPath."resize/".$newWidth."x".$newHeight."/".$fileName))){
       return "<img width='".$newWidth."' alt='".$altTitle."' title='".$altTitle."' height='".$newHeight."' src='".base_url($folderPath."resize/".$newWidth."x".$newHeight."/".$fileName)."'/>";
     }else{
-      return base_full(substr($folderPath,$lPath,$lfPath)."resize/".$newWidth."x".$newHeight."/".$fileName);
+      return "Error Image Output";
     }
   }
 

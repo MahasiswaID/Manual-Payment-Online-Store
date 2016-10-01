@@ -34,7 +34,7 @@ $(window).bind("load resize",function(){
 
   setInterval(function(){
     keKanan();
-  },3000);
+  },5000);
 
   function keKanan(){
     if(-ngeslide < ((banyakSlide-1)*lebarSlide)){

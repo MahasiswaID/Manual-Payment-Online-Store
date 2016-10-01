@@ -49,8 +49,7 @@ ErrorDocument 404 /404.php
 RewriteCond %{REQUEST_URI} ^/
 RewriteRule ^jual-([a-zA-Z0-9-]+)-murah?$ /index.php?params=home/produk/$1 [NC,L]
 
-
-RewriteRule ^([a-zA-Z/-]+)?$ /index.php?params=$1 [NC,L]
+RewriteRule ^([a-zA-Z0-9/-]+)?$ /index.php?params=$1 [NC,L]
 
 #RewriteRule ^([a-zA-Z-]+)?$ /index.php?controller=$1 [NC,L]
 #RewriteRule ^([a-zA-Z-]+)/([a-zA-Z-]+)?$ /index.php?controller=$1&action=$2 [NC,L]

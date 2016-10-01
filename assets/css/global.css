@@ -49,7 +49,7 @@
 }
 
 body {
-    background: #f5f5f5;
+    background: #fff;
 }
 
 header h1 {
@@ -63,12 +63,14 @@ header h4 {
 }
 
 header {
-    background: #fff;
     margin-bottom: 20px;
 }
 
 nav {
     background: #d3a953;
+    background: linear-gradient(#deb051,#c5983c,#9c772a);
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px #bbb;
 }
 
 #paling-atas {
@@ -86,11 +88,9 @@ img {
     border-color: #efefef !important;
 }
 
-.ui.container{
+/*.ui.container{
     max-width: 960px !important;
-}
-
-
+}*/
 
 /*.ui.form input:invalid,.ui.form select:invalid {
     box-shadow: 0px -1px 0px #ff1111 inset !important;
@@ -189,7 +189,7 @@ img {
 }
 
 .kotak-produk .detail-order a:first-child {
-    background: #2196F3;
+    background: #fb9abf;
     color: #fff;
 }
 
@@ -329,16 +329,28 @@ img {
     color: #848484;
     border-top: 1px solid #dedede;
 }
-nav a {
+nav a, nav button {
     color: #ffffff;
     display: inline-block;
-    padding: 10px 15px;
+    padding: 5px 8px;
+    margin: 8px 0px 8px 20px;
     text-transform: uppercase;
-    font-family: 'Pacifico';
+    font-family: 'Open Sans';
+    font-weight: bold;
+    background: transparent;
+    border: 0px;
 }
-nav a:hover {
-    color: #333;
+nav a:hover, nav a.aktif, nav button:hover, nav button.aktif {
+    background: #fff;
+    border-radius: 3px;
+    color: #ac8431;
+    box-shadow: 0 0 3px #b38934 inset;
 }
+
+nav form {
+    display: inline-block;
+}
+
 .widget {
     padding: 15px;
 }
@@ -425,4 +437,20 @@ nav a:hover {
 
 .slide-image {
     float: left;
+}
+#image-slider .pengaturan {
+    text-align: Center;
+    padding: 10px 0;
+}
+.widget {
+    background: #f5f5f5;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.widget h4.header {
+    background: #d3a953;
+    background: linear-gradient(#deb051,#c5983c,#9c772a);
+    margin: -15px -15px 15px -15px;
+    padding: 10px 15px;
+    color: #fff;
 }

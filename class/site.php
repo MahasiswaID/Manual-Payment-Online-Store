@@ -120,4 +120,28 @@ class Site{
     $koneksi = new Koneksi();
     return $koneksi->db();
   }
+
+  public static function getKategoriBrand(){
+    $kategori = array();
+    $brand = array();
+    $koneksi = new Koneksi();
+    $qkat = $koneksi->db()->query("SELECT DISTINCT brand,kategori FROM toko_produk");
+    while($fetch = $qkat->fetch_assoc()){
+      array_push($kategori,$fetch['kategori']);
+      array_push($brand,$fetch['brand']);
+    }
+    $kategori = array_unique($kategori);
+    $brand = array_unique($brand);
+    return array('kategori'=>$kategori,'brand'=>$brand);
+  }
+
+  public static function getKontak(){
+    $hasil = array();
+    $koneksi = new Koneksi();
+    $query = $koneksi->db()->query("SELECT * FROM toko_kontak");
+    while($fetch = $query->fetch_assoc()){
+      array_push($hasil,array('nama'=>$fetch['nama'],'val'=>$fetch['isi']));
+    }
+    return $hasil;
+  }
 }

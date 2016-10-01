@@ -1,5 +1,6 @@
 <?php
   class Produk extends Site{
+    /*
     private $id;
     private $nama;
     private $gambar_utama;
@@ -11,6 +12,18 @@
     private $status;
     private $url;
     private $gambar_tambahan;
+    */
+    public $id;
+    public $nama;
+    public $gambar_utama;
+    public $deskripsi;
+    public $kategori;
+    public $brand;
+    public $harga;
+    public $penentu;
+    public $status;
+    public $url;
+    public $gambar_tambahan;
 
     public function getId(){
       return (int)$this->id;
@@ -56,7 +69,7 @@
       return $this->gambar_tambahan;
     }
 
-    public static function getProduk($url='',$limits='',$start='',$gambarTambahan = 0){
+    public static function getProduk($url='',$limits='',$start='',$gambarTambahan = 0,$status=''){
       $arr = array();
       $koneksi = new Koneksi();
       if(!empty($limits)){
@@ -65,11 +78,18 @@
             $limits .= ' OFFSET '.$start;
           }
       }
+      $tambahan = "";
       if(!empty($url)){
         $url = $koneksi->db()->real_escape_string($url);
-        $query = "SELECT * FROM toko_produk WHERE url = '$url'";
+        if($status==1){
+          $tambahan = ' AND status = 1';
+        }
+        $query = "SELECT * FROM toko_produk WHERE url = '$url'".$tambahan;
       }else{
-        $query = "SELECT * FROM toko_produk ORDER BY id DESC ".$limits;
+        if($status==1){
+          $tambahan = 'WHERE status = 1';
+        }
+        $query = "SELECT * FROM toko_produk ".$tambahan." ORDER BY id DESC ".$limits;
       }
       $q = $koneksi->db()->query($query);
       if($q->num_rows!=0){

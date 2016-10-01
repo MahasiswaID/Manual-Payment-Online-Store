@@ -1,23 +1,30 @@
-<div id='image-slider'>
-  <div class='dalam'>
-    <div class='slide-image'>
-      <a href=''><img src='http://zizarashop.com/userfiles/1/4/48314/themes/langitbiru/assets/userfile_slideshow4.jpg'/></a>
-    </div>
-    <div class='slide-image'>
-      <a href=''><img src='http://zizarashop.com/userfiles/1/4/48314/themes/langitbiru/assets/userfile_slideshow5.jpg'/></a>
-    </div>
-    <div class='slide-image'>
-      <a href=''><img src='http://zizarashop.com/userfiles/1/4/48314/themes/langitbiru/assets/userfile_slideshow1.jpg'/></a>
-    </div>
-  </div>
-  <div class='pengaturan'>
-    <label id='kekiri'>Kiri</label>
-    <label id='kekanan'>Kanan</label>
-  </div>
-</div>
-
 <?php
-  $prod = Produk::getProduk();
+  $getProduk = Home::getSlider();
+  if(!empty($getProduk)){
+    ?>
+    <div id='image-slider'>
+      <div class='dalam'>
+        <?php
+          foreach ($getProduk as $produk) {
+            if(empty($produk['link'])){
+              $link = "#!";
+            }else{
+              $link = $produk['link'];
+            }
+            echo "<div class='slide-image'>
+              <a href='".safe_echo_html($link)."'>".returnImageResize(960,400,'kebutuhan/gambar_slide/',$produk['gambar'])."</a>
+            </div>";
+          }
+        ?>
+      </div>
+      <div class='pengaturan'>
+        <label id='kekiri'>Kiri</label>
+        <label id='kekanan'>Kanan</label>
+      </div>
+    </div>
+    <?php
+  }
+  $prod = Produk::getProduk('',$site->getTotalPost(),'',0,1);
   if(!empty($prod)){
     foreach ($prod as $produk){
       echo "

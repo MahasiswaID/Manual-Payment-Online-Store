@@ -395,4 +395,118 @@
       header("Location:".base_url('admin/produk'));
     }
 
+    public function pengaturanslider(){
+      $this->setCustomTitle("Pengaturan Slider");
+      $query = $this->db()->query("SELECT * FROM toko_slider ORDER BY id DESC");
+      $arr = array();
+      while($fetch = $query->fetch_assoc()){
+        $slider = array(
+          'id' => $fetch['id'],
+          'title' => $fetch['title'],
+          'active' => $fetch['active'],
+          'description' => $fetch['description'],
+          'link' => $fetch['link'],
+          'gambar' => $fetch['gambar']
+        );
+        array_push($arr,$slider);
+      }
+      $this->setSiteData($arr);
+    }
+
+    public function tambahSlider(){
+      $this->setCustomTitle("Tambah Slider");
+      if(isset($_POST['tambah'])){
+        $title = $description = $link = "";
+        $aktif = 0;
+
+        if(!empty($_POST['active'])){
+          $active = (int)$_POST['active'];
+        }
+
+        if($active!=1){
+          $active = 0;
+        }
+
+        if(!empty($_POST['title'])){
+          $title = $this->db()->real_escape_string($_POST['title']);
+        }
+        if(!empty($_POST['description'])){
+          $description = $this->db()->real_escape_string($_POST['description']);
+        }
+        if(!empty($_POST['link'])){
+          $link = $this->db()->real_escape_string($_POST['link']);
+        }
+
+        $uploadOk = 1;
+        if(!empty($_FILES['gambar_utama']['name'])){
+          $targetFolder = base_full('kebutuhan/gambar_slide/');
+          if(!file_exists($targetFolder)){
+            mkdir($targetFolder,0777);
+          }
+          $extensiFile = pathinfo(basename($_FILES['gambar_utama']['name']),PATHINFO_EXTENSION);
+          $namaFile = sha1(rand(1,9).rand(1,9).rand(1,9).date("Y-m-d h:i:s").rand(1,9).rand(1,9).rand(1,9)).'.'.$extensiFile;
+          $targetFile = $targetFolder.$namaFile;
+          $check = getimagesize($_FILES['gambar_utama']['tmp_name']);
+          if($check==false){
+            $this->addAlert(array('negative','File yang diupload bukan berbentuk gambar'));
+            $uploadOk = 0;
+          }
+          if($_FILES['gambar_utama']['size']>2000000){
+            $this->addAlert(array('negative','Ukuran file yang diupload terlalu besar'));
+            $uploadOk = 0;
+          }
+          if($extensiFile!='jpg' && $extensiFile!='JPG' && $extensiFile!='png' && $extensiFile!='PNG' && $extensiFile!='jpeg' && $extensiFile!='JPEG'){
+            $this->addAlert(array('negative','FIle gambar yang diupload bukan berextensi jpg, jpeg atau png'));
+            $uploadOk = 0;
+          }
+
+          if($uploadOk==1){
+            if(move_uploaded_file($_FILES['gambar_utama']['tmp_name'],$targetFile)){
+              $kue = "INSERT INTO toko_slider (title, description, link, gambar, active) VALUES('$title','$description','$link','$namaFile',$active)";
+              $berhasil = $this->db()->query($kue);
+              if($berhasil){
+                die(header("Location:".base_url('admin/pengaturanslider')));
+              }else{
+                $this->addAlert(array('negative','Gagal menambah slider'));
+              }
+            }else{
+              $this->addAlert(array('negative','Maaf gambar gagal diupload'));
+              $uploadOk = 0;
+            }
+          }
+        }else{
+          $this->addAlert(array('negative','Gambar slider harus diupload'));
+        }
+      }
+    }
+
+    public function hapusSlider($id=0){
+      $id = (int)$id;
+      $this->db()->query("DELETE FROM toko_slider WHERE id = $id");
+      header("Location:".base_url('admin/pengaturanslider'));
+    }
+
+    public function pengaturanPembelian(){
+      $this->setCustomTitle("Pengaturan Kontak");
+      if(isset($_POST['tambah'])){
+        if((!empty($_POST['nama']))&&(!empty($_POST['isi']))){
+          $nama = $this->db()->real_escape_string($_POST['nama']);
+          $isi = $this->db()->real_escape_string($_POST['isi']);
+
+          $this->db()->query("INSERT INTO toko_kontak (nama,isi) VALUES('$nama','$isi')");
+        }
+      }
+      $arr = array();
+      $query = $this->db()->query("SELECT * FROM toko_kontak");
+      while($fetch = $query->fetch_assoc()){
+        array_push($arr,array('id'=>$fetch['id'], 'nama'=>$fetch['nama'], 'isi'=>$fetch['isi']));
+      }
+      $this->setSiteData($arr);
+    }
+
+    public function hapusPembelian($id=0){
+      $id = (int)$id;
+      $this->db()->query("DELETE FROM toko_kontak WHERE id = '$id'");
+      header("Location:".base_url('admin/pengaturanPembelian'));
+    }
   }

@@ -52,6 +52,10 @@
       $site = new Admin();
       break;
     }
+    case 'search' : {
+      $site = new Search();
+      break;
+    }
   }
 
   $site->infoSitus();
