@@ -48,10 +48,6 @@
   src: url('../fonts/openSans/OpenSans-BoldItalic.ttf') format('truetype');
 }
 
-body {
-    background: #fff;
-}
-
 header h1 {
     font-family: 'Pacifico',cursive;
     font-size: 45px;
@@ -64,13 +60,6 @@ header h4 {
 
 header {
     margin-bottom: 20px;
-}
-
-nav {
-    background: #d3a953;
-    background: linear-gradient(#deb051,#c5983c,#9c772a);
-    border-radius: 4px;
-    box-shadow: 0px 1px 3px #bbb;
 }
 
 #paling-atas {
@@ -86,6 +75,18 @@ img {
     border-radius: 3px !important;
     box-shadow: 0px -1px 1px #dedede inset !important;
     border-color: #efefef !important;
+}
+
+.panel-default .panel-heading .panel-title button {
+    color: #696763;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: Transparent;
+    border: 0px;
+    font-weight: bold;
+    padding: 0px;
 }
 
 /*.ui.container{
@@ -158,7 +159,11 @@ img {
 
 .kotak-produk .nama-harga {
     padding: 10px;
-    background: #f1f1f1;
+    background: #fff;
+}
+
+.kotak-produk .detail-order {
+    display: none;
 }
 
 .dalam .gambar * {
@@ -207,21 +212,19 @@ img {
 }
 
 .gambar-utama {
-    text-align: center;
-    background: #fff;
+    height: 400px;
+    display: table-cell;
+    vertical-align: middle;
+    border: 1px solid #f7f7f0;
     padding: 10px;
-    /* margin-bottom: 10px; */
-    border-bottom: 1px solid #eee;
-    /* box-shadow: 0 2px 3px #e8e8e8; */
 }
 
 .gambar-lain .gambar img {
     display: block;
 }
-
 .gambar-lain .gambar {
     display: inline-block;
-    margin: 9px;
+    margin: 3px 2px 0 2px;
     background: #fff;
     /* padding: 4px; */
     /* box-shadow: 1px 1px 3px #ccc; */
@@ -232,11 +235,19 @@ img {
     text-align: center;
     background: #fbfbfb;
     border-bottom: 1px solid #ddd;
+    border-right: 1px solid #eee;
+    border-left: 1px solid #eee;
+    height: 68px;
+    overflow: hidden;
+    margin: 0 auto;
 }
 
 .detil-produk {
     padding: 15px;
     background: #fff;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+    border-left: 1px solid #eee;
 }
 
 .detil-produk > h1.header {
@@ -287,13 +298,15 @@ img {
 }
 
 #sidebar {
-    background: #fff;
     border-radius: 3px 3px 0 0;
 }
 
 .sidebar-produk {
     text-align: center;
     padding: 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-bottom: 0px;
 }
 
 .sidebar-produk .harga {
@@ -302,8 +315,8 @@ img {
     margin: 5px 0;
 }
 
-.sidebar-produk .tombol-order {
-    display: block;
+.tombol-order {
+    display: inline-block;
     margin-top: 23px;
     background: #d3a953;
     color: #fff;
@@ -311,6 +324,11 @@ img {
     font-weight: bold;
     font-size: 17px;
     padding: 15px;
+}
+
+.tombol-order:hover {
+    color: #fff;
+    background: #b38b3b;
 }
 
 .kat-brand tr:nth-child(1) td {
@@ -327,8 +345,16 @@ img {
     padding: 15px;
     font-size: 13px;
     color: #848484;
+    border: 1px solid #ccc;
     border-top: 1px solid #dedede;
+    margin-bottom: 15px;
 }
+
+nav.pagination-nav {
+    overflow: hidden;
+    clear: both;
+}
+
 nav a, nav button {
     color: #ffffff;
     display: inline-block;
@@ -443,9 +469,11 @@ nav form {
     padding: 10px 0;
 }
 .widget {
-    background: #f5f5f5;
+    background: #fff;
     border-radius: 5px;
     overflow: hidden;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
 }
 .widget h4.header {
     background: #d3a953;
@@ -453,4 +481,45 @@ nav form {
     margin: -15px -15px 15px -15px;
     padding: 10px 15px;
     color: #fff;
+}
+label {
+    font-weight: bold;
+}
+.tab-content .tab-pane {
+    padding: 0 20px;
+}
+.category-tab .tab-content ul {
+    background: inherit;
+    border: 0px;
+    list-style: inherit;
+    padding-left: 20px;
+}
+.category-tab .tab-content ul li {
+    list-style: inherit;
+}
+.widg {
+    margin-bottom: 20px;
+}
+
+.kotak-widget .edit-button {
+    font-size: 11px;
+    margin: 10px 0 -5px 0;
+}
+
+.kotak-widget .title {
+    font-weight: bold;
+    font-size: 12px;
+}
+.kotak-widget {
+    background: #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.kotak-widget .edit-section {
+    margin: 15px -10px -10px -10px;
+    padding: 10px 10px 10px 10px;
+    border-top: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.57);
 }

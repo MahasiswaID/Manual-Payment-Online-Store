@@ -1,5 +1,10 @@
 $(".tombol-order").click(function(){
-  $('.small.modal').modal('show');
+  $('#myModal').modal('show');
+});
+
+$(".kotak-widget .edit-button .left a").click(function(){
+  $(".kotak-widget .edit-section").slideUp(300);
+  $(this).parents(".kotak-widget").children(".edit-section").slideDown(300);
 });
 
 $(".hapus-gambar").click(function(){
@@ -12,25 +17,15 @@ $(".hapus-gambar").click(function(){
   }
 });
 
-$('.ui.dropdown').dropdown();
-
-$(".kotak-produk .detail-order a:last-child").click(function(){
-  $('.small.modal').modal('show');
-});
-
-$(".ui.top.attached.menu>.item").click(function(){
-  $('.ui.sidebar').sidebar('toggle');
-});
-
-$('.special.cards .image').dimmer({
-  on: 'hover'
-});
-
 $(window).bind("load resize",function(){
   $("#imgPreview").height($("#imgPreview").width());
-  var banyakSlide = $(".slide-image").length;
-  var lebarSlide = $("#image-slider").width();
+  var banyakSlide = $(".gambar-lain .dalam").length;
+  var lebarSlide = $(".gambar-lain").width();
   var ngeslide = 0;
+
+  $(".gambar-lain").width(parseInt($(".gambar-lain").width() / 64) * 64);
+
+  $(".gambar-lain .dalam").width($(".gambar-lain .gambar").length * 64);
 
   setInterval(function(){
     keKanan();
@@ -42,7 +37,7 @@ $(window).bind("load resize",function(){
     }else{
       ngeslide = 0;
     }
-    $("#image-slider .dalam").animate({
+    $(".gambar-lain .dalam").animate({
       marginLeft : ngeslide
     });
   }
@@ -53,7 +48,7 @@ $(window).bind("load resize",function(){
     }else{
       ngeslide += lebarSlide;
     }
-    $("#image-slider .dalam").animate({
+    $(".gambar-lain .dalam").animate({
       marginLeft : ngeslide
     });
   }
@@ -123,10 +118,6 @@ $(document).ready(function(){
 });
 
 
-$('.ui.radio.checkbox')
-  .checkbox()
-;
-
 $("#unsave-form").areYouSure({
   message: 'Ada beberapa perubahan yang belum disimpan. Yakin ingin keluar dari halaman ini?'
 });
@@ -138,45 +129,6 @@ if($(window).height() > $(".login-form").height()){
 if($(window).height() > $(".user-form").height()){
   $(".user-form").css("marginTop",($(window).height()-$(".user-form").height())/2);
 }
-
-$(document)
-    .ready(function() {
-
-      // fix menu when passed
-      $('.masthead')
-        .visibility({
-          once: false,
-          onBottomPassed: function() {
-            $('.fixed.menu').transition('fade in');
-          },
-          onBottomPassedReverse: function() {
-            $('.fixed.menu').transition('fade out');
-          }
-        })
-      ;
-
-      // create sidebar and attach to menu open
-      $('.ui.sidebar')
-        .sidebar('attach events', '.toc.item')
-      ;
-
-    })
-  ;
-
-  $(function() {
-    $('a[href*="#"]:not([href="#"])').click(function() {
-      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-        if (target.length) {
-          $('html, body').animate({
-            scrollTop: target.offset().top - 90
-          }, 1000);
-          return false;
-        }
-      }
-    });
-  });
 
 $(document).ready(function(){
   $(".gambar-lain .gambar").click(function(){

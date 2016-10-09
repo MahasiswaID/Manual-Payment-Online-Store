@@ -10,13 +10,13 @@
  *
  * Version: 2.3 released 23/06/2013
  */
- 
+
 var jbImagesDialog = {
-	
+
 	resized : false,
 	iframeOpened : false,
 	timeoutStore : false,
-	
+
 	inProgress : function() {
 		document.getElementById("upload_infobar").style.display = 'none';
 		document.getElementById("upload_additional_info").innerHTML = '';
@@ -27,7 +27,7 @@ var jbImagesDialog = {
 			// tinyMCEPopup.editor.windowManager.resizeBy(0, 30, tinyMCEPopup.id);
 		}, 20000);
 	},
-	
+
 	showIframe : function() {
 		if (this.iframeOpened == false)
 		{
@@ -36,7 +36,7 @@ var jbImagesDialog = {
 			this.iframeOpened = true;
 		}
 	},
-	
+
 	uploadFinish : function(result) {
 		if (result.resultCode == 'failed')
 		{
@@ -45,7 +45,7 @@ var jbImagesDialog = {
 			document.getElementById("upload_infobar").style.display = 'block';
 			document.getElementById("upload_infobar").innerHTML = result.result;
 			document.getElementById("upload_form_container").style.display = 'block';
-			
+
 			if (this.resized == false)
 			{
 				// tinyMCEPopup.editor.windowManager.resizeBy(0, 30, tinyMCEPopup.id);
@@ -57,20 +57,20 @@ var jbImagesDialog = {
 			document.getElementById("upload_in_progress").style.display = 'none';
 			document.getElementById("upload_infobar").style.display = 'block';
 			document.getElementById("upload_infobar").innerHTML = 'Upload Complete';
-			
+
 			var w = this.getWin();
 			tinymce = w.tinymce;
-		
+
 			tinymce.EditorManager.activeEditor.insertContent('<img src="' + result.filename +'">');
-			
+
 			this.close();
 		}
 	},
-	
+
 	getWin : function() {
 		return (!window.frameElement && window.dialogArguments) || opener || parent || top;
 	},
-	
+
 	close : function() {
 		var t = this;
 

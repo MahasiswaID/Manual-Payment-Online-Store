@@ -1,5 +1,5 @@
 <?php
-		$config['img_path'] = '/uploads/images';
+		$config['img_path'] = '/kebutuhan/gambar_lain/';
 		$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . $config['img_path'];
 		$config['allowed_types'] = 'gif|jpg|png|jpeg|GIF|JPG|PNG|JPEG';
 		$config['max_size'] = 0;

@@ -1,37 +1,55 @@
 <?php
   class Search extends Site{
 
-    public function index(){
+    public function index($q='',$kategori='',$p=1){
+      $this->showSlider = 1;
       $this->setCustomTitle("Pencarian");
-      $tambahan1 = $tambahan2 = "";
-      if(!empty($_POST['q'])){
-        $q = $this->db()->real_escape_string($_POST['q']);
-        $tambahan1 = "LIKE '%".$q."%'";
-        //$query = $this->db()->query("SELECT * FROM toko_produk WHERE nama LIKE '%".$q."%'");
+      $tambahan1 = $tambahan2 = $and = "";
+
+      $p = (int)$p;
+
+      if($p<1){
+        $p = 1;
       }
-      if(!empty($_POST['kategori'])){
-        $kategori = $this->db()->real_escape_string($_POST['kategori']);
-        $tambahan2 = "kategori = '$kategori'";
-        //$query = $this->db()->query("SELECT * FROM toko_produk WHERE kategori = '$kategori'");
+
+      $arr = array('listproduk'=>array(),'banyakproduk'=>0,'q'=>$q,'kategori'=>$kategori,'p'=>$p);
+
+      $awalPost = ($p-1)*$this->getTotalPost();
+
+      //if(!empty($_POST['q'])){
+        $q = $this->db()->real_escape_string($q);
+      //}
+
+      if($q=='-'){
+        $q='';
+      }
+
+      if($kategori=='-'){
+        $kategori = '';
+      }
+
+      $tambahan1 = " nama LIKE '%".$q."%'";
+
+      if(!empty($kategori)){
+        $kategori = $this->db()->real_escape_string($kategori);
+        $tambahan2 = " kategori = '$kategori'";
       }
 
       if(!empty($tambahan1) || !empty($tambahan2)){
         if(!empty($tambahan1) && !empty($tambahan2)){
-          $qurs = "SELECT * FROM toko_produk WHERE ".$tambahan1." AND ".$tambahan2;
-        }else{
-          if(!empty($tambahan1)){
-            $qurs = "SELECT * FROM toko_produk WHERE ".$tambahan1;
-          }else if(!empty($tambahan2)){
-            $qurs = "SELECT * FROM toko_produk WHERE ".$tambahan2;
-          }
+          $and = " AND";
         }
+        $qurs = "SELECT * FROM toko_produk WHERE status = 1 AND ".$tambahan1.$and.$tambahan2;
+        $banyakProduk = $this->db()->query($qurs);
+        $fetchBanyakProduk = $banyakProduk->num_rows;
 
-        $qurs .= " ORDER BY id DESC LIMIT ".$this->getTotalPost();
+        $arr['banyakproduk'] = $fetchBanyakProduk;
+
+        $qurs .= " ORDER BY id DESC LIMIT ".$this->getTotalPost()." OFFSET ".$awalPost;
         //echo $qurs;
         $query = $this->db()->query($qurs);
         if($query->num_rows!=0){
           include_once('class/produk.php');
-          $arr = array();
           while($fetch = $query->fetch_assoc()){
             $produk = new Produk();
             $produk->id = $fetch['id'];
@@ -51,7 +69,7 @@
                 array_push($produk->gambar_tambahan,array('nama'=>$ftmbh['nama_file'],'id'=>$ftmbh['id']));
               }
             //}
-            array_push($arr,$produk);
+            array_push($arr['listproduk'],$produk);
           }
           $this->setSiteData($arr);
         }else{

@@ -1,13 +1,8 @@
-<!doctype html>
-<!--
-  Sistem YANG BARU ini dikreasikan dan dibuat oleh...
-  Nama    : Mahasiswa
-  URL     : http://www.mahasiswa.id
-  CP      : 0856 9432 5922
-  Email   : noval@mahasiswa.id
--->
-<HTML lang='id'>
-  <head itemscope itemtype="http://schema.org/WebSite">
+<!DOCTYPE html>
+<html lang='id'>
+<head>
+    <meta charset="utf-8">
+    <head itemscope itemtype="http://schema.org/WebSite">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
     <title itemprop='name'><?php if(!empty($site->getCustomTitle())){echo $site->getCustomTitle()." - ";} ?><?php echo safe_echo_html($site->getTitle()); ?></title>
     <meta name='description' content='<?php echo safe_echo_html($site->getDescription()); ?>'/>
@@ -15,9 +10,17 @@
     <meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0'/>
 
     <link rel="canonical" href="http://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>"/>
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"/>
-    <link href='<?php echo base_url('assets/semantic/semantic.min.css'); ?>' rel='stylesheet'/>
+    <link href="<?php echo base_url('assets/eshopper/css/bootstrap.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/eshopper/css/font-awesome.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/eshopper/css/prettyPhoto.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/eshopper/css/price-range.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/eshopper/css/animate.css'); ?>" rel="stylesheet">
+  	<link href="<?php echo base_url('assets/eshopper/css/main.css'); ?>" rel="stylesheet">
+  	<link href="<?php echo base_url('assets/eshopper/css/responsive.css'); ?>" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
     <link href='<?php echo base_url('assets/css/global.css'); ?>?ver=3' rel='stylesheet'/>
     <link href='<?php echo base_url('assets/datatable/datatables.min.css'); ?>' rel='stylesheet'/>
     <link href='<?php echo base_url('assets/flat-admin/css/font-awesome.min.css'); ?>' rel='stylesheet'/>
@@ -64,36 +67,174 @@
     <meta itemprop="name" content="<?php echo safe_echo_html($site->getTitle()); ?>">
     <meta itemprop="description" content="<?php echo safe_echo_html($site->getDescription()); ?>">
     <!--<meta itemprop="image" content="">-->
+</head><!--/head-->
 
-  </head>
-  <body>
-    <div class='ui container home-container'>
-      <header>
-        <div id='paling-atas'>
-          <div class='kiri'>
-            <img width='250' src='<?php echo base_url('assets/images/nayys_new.jpg'); ?>'/>
-          </div>
-          <div class='kanan'>
+<body>
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
 
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/images/nayys_new.jpg'); ?>" width='100' alt="" /></a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>
+								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                  <ul role="menu" class="sub-menu">
+                      <li><a href="shop.html">Products</a></li>
+  										<li><a href="product-details.html">Product Details</a></li>
+  										<li><a href="checkout.html">Checkout</a></li>
+  										<li><a href="cart.html">Cart</a></li>
+  										<li><a href="login.html">Login</a></li>
+                  </ul>
+                </li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="Search"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+  <?php
+  $getProduk = Site::getSlider();
+  if(!empty($getProduk) && $site->getShowSlider()==1){
+    ?>
+    <section id="slider"><!--slider-->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <?php
+                  $no = 0;
+                  foreach ($getProduk as $produk) {
+                    if($no==0){
+                      $aktif = ' active';
+                    }else{
+                      $aktif = '';
+                    }
+                    echo '<li data-target="#slider-carousel" data-slide-to="'.$no.'" class="'.$aktif.'"></li>';
+                    $no++;
+                  }
+                ?>
+              </ol>
+              <div class="carousel-inner">
+              <?php
+                $no = 1;
+                foreach ($getProduk as $produk) {
+                  if($no==1){
+                    $aktif = ' active';
+                  }else{
+                    $aktif = '';
+                  }
+                  echo "<div class='item".$aktif."'>
+                    ".returnImageResize(960,400,'kebutuhan/gambar_slide/',$produk['gambar'])."
+                  </div>";
+                  $no++;
+                }
+              ?>
+              </div>
+              <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+  							<i class="fa fa-angle-left"></i>
+  						</a>
+  						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+  							<i class="fa fa-angle-right"></i>
+  						</a>
+            </div>
           </div>
         </div>
-        <nav>
-          <a class='aktif' href='<?php echo base_url(); ?>'>Home</a>
-          <form method='POST' action='<?php echo base_url('search'); ?>'>
+      </div>
+    </section>
+    <?php
+  }
+
+  $infoProd = $site->getProductFilter();
+  ?>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Kategori</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+              <form method='POST' action="<?php echo base_url('search'); ?>">
+                <?php
+                  foreach ($infoProd['kategori'] as $katProd) {
+                    echo "
+                      <div class='panel panel-default'>
+                        <div class='panel-heading'>
+                          <h4 class='panel-title'><a href='".base_url('search/index/-/').safe_echo_input($katProd)."'>".safe_echo_html($katProd)."</a></h4>
+                        </div>
+                      </div>
+                    ";
+                  }
+                ?>
+              </form>
+						</div><!--/category-products-->
+
             <?php
-              $listKategori = Site::getKategoriBrand()['kategori'];
-              foreach ($listKategori as $kategori) {
-                echo "<button type='submit' name='kategori' value='".safe_echo_html($kategori)."' href='#!'>".safe_echo_html($kategori)."</button>";
-              }
-            ?>
-          </form>
-        </nav>
-      </header>
-      <div class='ui grid'>
-        <div class='four wide column'>
-          <div id='sidebar'>
-            <?php
-              if(!empty($site->getInfoProduk())){
+              /*if(!empty($site->getInfoProduk())){
                 $infoProduk = $site->getInfoProduk();
                 echo "<div class='sidebar-produk'>
                   <div class='harga'>".toRupiah($infoProduk->getHarga())."</div>
@@ -107,23 +248,35 @@
                     </tbody>
                   </table>
                 </div>";
-              }
+              }*/
+              echo $site->getSidebar();
             ?>
-            <!--<div class='widget'>
-              <h4 class='header'>Kategori</h4>
-              <form method='GET' class='ui form form-pencarian'>
-                  <?php
-                  /*$listKategori = Home::getKategoriBrand()['kategori'];
-                  $no = 1;
-                  foreach ($listKategori as $kategori) {
-                    echo "<div class='inline field'><input type='checkbox' value='".safe_echo_html($kategori)."' id='kat".$no."'/> <label for='kat".$no."'>".safe_echo_html($kategori)."</label></div>";
-                    $no++;
-                  }*/
-                  ?>
-                  <input class='kat' value='' type='hidden'/>
-                <button type='submit' class='ui button primary' name='submit'>Cari</button>
-              </form>
-            </div>-->
+
+						<!--<div class="price-range">
+              <h2>Price Range</h2>
+              <div class="well text-center">
+              <input type="text" class="span2" value="" data-slider-min="<?php echo $infoProd['min']; ?>" data-slider-max="<?php echo $infoProd['max']; ?>" data-slider-step="5" data-slider-value="[<?php echo $infoProd['min']; ?>,<?php echo $infoProd['max']; ?>]" id="sl2" ><br />
+              <b class="pull-left"><?php echo toRupiah($infoProd['min']); ?></b> <b class="pull-right"><?php echo toRupiah($infoProd['max']); ?></b>
+            </div>
+						</div>-->
+
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+
+          <?php
+            if(!empty($site->alert)){
+              echo $site->getAlert();
+            }
+          ?>
+
+    <!--<div class='ui container home-container'>
+      <div class='ui grid'>
+        <div class='four wide column'>
+          <div id='sidebar'>
+
           </div>
         </div>
         <div class='twelve wide column'>
+        -->

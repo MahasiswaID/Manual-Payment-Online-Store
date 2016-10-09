@@ -14,7 +14,6 @@
     }
   }
 
-
   if(!empty($__controller)){
     $controller = safe_echo_input($__controller);
   }else{
@@ -58,9 +57,13 @@
     }
   }
 
+  if(empty($site)){
+    die(header("Location:".base_url()));
+  }
+
   $site->infoSitus();
-  if(method_exists($site,$action)){
-    call_user_func_array(array($site,$action), $prm);
+  if (method_exists($site, $action) && is_callable(array($site, $action))){
+      call_user_func_array(array($site, $action),$prm);
   }else{
     $site->setCustomTitle('Halaman tidak ditemukan');
     $site->addAlert(array('negative','Halaman tidak ditemukan'));

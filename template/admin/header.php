@@ -73,9 +73,8 @@
     <a class="<?php if($action=='index'){echo "active";} ?> item">
       Home
     </a>
-    <a href='<?php echo base_url('admin/produk'); ?>' class="<?php if(stristr($action,'produk')){echo "active";} ?> item">
-      Produk
-    </a>
+    <a href='<?php echo base_url('admin/produk'); ?>' class="<?php if(stristr($action,'produk')){echo "active";} ?> item">Produk</a>
+    <a href='<?php echo base_url('admin/page'); ?>' class="<?php if(stristr($action,'page')){echo "active";} ?> item">Halaman</a>
     <div class="ui dropdown link item">
       <span class="text">Pengaturan</span>
       <i class="dropdown icon"></i>
@@ -83,6 +82,7 @@
         <a class="item" href='<?php echo base_url('admin/pengaturansitus'); ?>'>Info Situs</a>
         <a class="item" href='<?php echo base_url('admin/pengaturanPembelian'); ?>'>Info Kontak</a>
         <a class="item" href='<?php echo base_url('admin/pengaturanslider'); ?>'>Slider</a>
+        <a class="item" href='<?php echo base_url('admin/pengaturanTemplate'); ?>'>Template</a>
       </div>
     </div>
     <div class="right menu">
@@ -92,9 +92,7 @@
           <a class="item">Ubah Password</a>
         </div>
       </div>
-      <a class="ui item">
-        Logout
-      </a>
+      <a class="ui item" href='<?php echo base_url('admin/logout'); ?>'>Logout</a>
     </div>
   </div>
   <div class="ui segment">

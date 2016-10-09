@@ -37,16 +37,11 @@
     }
   }
 
-  function pagination($banyakpage,$url,$banyak){
+  function pagination($banyakpage,$url,$banyak,$page=1){
     $banyakpage = ceil((float)(($banyakpage)/$banyak));
     echo "
     <nav class='pagination-nav'>
       <ul class=\"pagination\">";
-        if(!empty($_GET['page'])){
-          $page = (int)$_GET['page'];
-        }else{
-          $page = 1;
-        }
         if($page<0){
           $page = 1;
         }
@@ -372,4 +367,28 @@
     else
         $ipaddress = '127.0.0.1';
     return $ipaddress;
+  }
+
+  //ak_img_resize('kebutuhan/gambar_slide/3f165f4554a840060764dbac1fd658c9f1f6587e.jpg','kebutuhan/gambar_slide/resized_3f165f4554a840060764dbac1fd658c9f1f6587e.jpg',500,500,'jpg');
+  function ak_img_resize($target, $newcopy, $w, $h, $ext) {
+      list($w_orig, $h_orig) = getimagesize($target);
+      $scale_ratio = $w_orig / $h_orig;
+      if (($w / $h) > $scale_ratio) {
+             $w = $h * $scale_ratio;
+      } else {
+             $h = $w / $scale_ratio;
+      }
+      $img = "";
+      $ext = strtolower($ext);
+      if ($ext == "gif"){
+        $img = imagecreatefromgif($target);
+      } else if($ext =="png"){
+        $img = imagecreatefrompng($target);
+      } else {
+        $img = imagecreatefromjpeg($target);
+      }
+      $tci = imagecreatetruecolor($w, $h);
+      // imagecopyresampled(dst_img, src_img, dst_x, dst_y, src_x, src_y, dst_w, dst_h, src_w, src_h)
+      imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
+      imagejpeg($tci, $newcopy, 80);
   }
