@@ -23,12 +23,13 @@
                 <label>Title</label>
                 <input name='title' value='".safe_echo_input($widget['title'])."' maxlength=\"20\" placeholder='Title'/>
               </div>
+              <input type='hidden' name='id' value='".$widget['id']."'/>
               <div class='field'>
                 <label>Content</label>
                 <textarea name='content' placeholder='Content' required>".safe_echo_input($widget['content'])."</textarea>
               </div>
               <div class='field'>
-                <button type='submit' name='tambah' class='ui button primary'>Tambah</button>
+                <button type='submit' name='ubah' class='ui button primary'>Tambah</button>
               </div>
             </form>
           </div>

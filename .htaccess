@@ -46,6 +46,12 @@ ErrorDocument 404 /404.php
 #RewriteCond %{HTTP_USER_AGENT} "symbian|midp|wap|phone|pocket|mobile|pda|psp" [NC]
 #RewriteRule ^$ http://m.anehdidunia.com/ [L,R=302]
 
+RewriteCond %{REQUEST_URI} ^/page/
+RewriteRule ^page/([a-zA-Z0-9-]+)?$ /index.php?params=home/page/$1 [NC,L]
+
+RewriteCond %{REQUEST_URI} ^/blog/
+RewriteRule ^blog/([a-zA-Z0-9-]+)?$ /index.php?params=home/blog/$1 [NC,L]
+
 RewriteCond %{REQUEST_URI} ^/
 RewriteRule ^jual-([a-zA-Z0-9-]+)-murah?$ /index.php?params=home/produk/$1 [NC,L]
 

@@ -23,4 +23,34 @@
       }
     }
 
+    public function page($url = 'error')
+    {
+      $url = $this->db()->real_escape_string($url);
+      $query = $this->db()->query("SELECT * FROM toko_halaman WHERE slug = '$url' AND status = 1");
+      if($query->num_rows != 0){
+        $arr = array();
+        $arr = $query->fetch_array();
+        $this->setSiteData($arr);
+        $this->setCustomTitle(safe_echo_html($arr['judul']));
+      }else{
+        $this->addAlert(array('negative','Halaman tidak ditemukan'));
+        $this->setCustomTitle('Halaman tidak ditemukan');
+      }
+    }
+
+    public function blog($url = 'error')
+    {
+      $url = $this->db()->real_escape_string($url);
+      $query = $this->db()->query("SELECT * FROM toko_blog WHERE slug = '$url' AND status = 1");
+      if($query->num_rows != 0){
+        $arr = array();
+        $arr = $query->fetch_array();
+        $this->setSiteData($arr);
+        $this->setCustomTitle(safe_echo_html($arr['title']));
+      }else{
+        $this->addAlert(array('negative','Artikel tidak ditemukan'));
+        $this->setCustomTitle('Artikel tidak ditemukan');
+      }
+    }
+
   }

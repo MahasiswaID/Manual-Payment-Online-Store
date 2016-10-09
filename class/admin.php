@@ -723,6 +723,32 @@ class Admin extends Site
             }
         }
 
+        if( isset($_POST['ubah']) ){
+          $id = 0;
+          if(!empty($_POST['id'])){
+            $id = (int)$_POST['id'];
+          }
+          if (!empty($_POST['content'])) {
+            $title   = "";
+            $content = $this->db()->real_escape_string(($_POST['content']));
+
+            if (!empty($_POST['title'])) {
+                $title = $this->db()->real_escape_string($_POST['title']);
+            }
+
+            $masukin = $this->db()->query("UPDATE toko_widget SET title = '$title', content = '$content' WHERE id = '$id'");
+            if (!$masukin) {
+                $this->addAlert('negative', 'Gagal mengubah widget');
+            }
+
+          } else {
+              $this->addAlert(array(
+                  'negative',
+                  'Content widget harus terisi'
+              ));
+          }
+        }
+
         $query = $this->db()->query("SELECT * FROM toko_widget ORDER BY position ASC");
         $arr   = array();
         if ($query->num_rows != 0) {
@@ -834,6 +860,7 @@ class Admin extends Site
     }
 
     public function editTemplate($fileName=''){
+      $this->setCustomTitle('Edit Template');
       if( !empty($fileName) ){
         $valid = 1;
         if( $fileName != 'header' && $fileName != 'footer' ){
@@ -843,6 +870,19 @@ class Admin extends Site
         }
 
         if($valid == 1){
+
+          if( isset($_POST['submit']) ){
+            $konten = "";
+            if( !empty($_POST['isiFile']) ){
+              $konten = $_POST['isiFile'];
+            }
+            $fileBaru = fopen('template/'.$fileName.'.php','w') or die('File tidak dapat dibuka');
+            fwrite($fileBaru,$konten);
+            fclose($fileBaru);
+            $this->addAlert(array('positive','Berhasil menyimpan file'));
+          }
+
+
           $file = fopen('template/'.$fileName.'.php','r') or die('File tidak dapat dibuka');
           $this->setSiteData(fread($file,filesize('template/'.$fileName.'.php')));
           fclose($file);
@@ -852,4 +892,83 @@ class Admin extends Site
         $this->addAlert(array('negative','File tidak ditemukan'));
       }
     }
+
+    public function blog(){
+      $this->setCustomTitle("Daftar Blog");
+      $query = $this->db()->query("SELECT * FROM toko_blog ORDER BY id DESC");
+      $arr = array();
+      while($fetch = $query->fetch_array()){
+        array_push($arr,$fetch);
+      }
+      $this->setSiteData($arr);
+    }
+
+    public function tambahBlog(){
+      $this->setCustomTitle("Tambah Artikel Blog");
+      if( isset($_POST['submit']) ){
+
+        if( !empty($_POST['judul']) && !empty($_POST['deskripsi']) && !empty($_POST['status']) ){
+
+          $judul = $this->db()->real_escape_string($_POST['judul']);
+          $deskripsi = $this->db()->real_escape_string($_POST['deskripsi']);
+          $status = (int)$_POST['status'];
+          $slug = slug($judul);
+
+          $cekSlug = $this->db()->query("SELECT slug FROM toko_blog WHERE slug = '$slug'");
+          $no = 1;
+          while($cekSlug->num_rows != 0){
+            $cekSlug = $this->db()->query("SELECT slug FROM toko_blog WHERE slug = '$slug'");
+            $slug = slug($judul)."-".$no;
+            $no++;
+          }
+
+          $query = $this->db()->query("INSERT INTO toko_blog (title,description,slug,status,hits,publishedTime) VALUES('$judul','$deskripsi','$slug','$status',0,'".date("Y-m-d h:i:s")."')");
+          if($query){
+            die(header("Location:".base_url('admin/blog')));
+          }else{
+            $this->addAlert(array('negative','Gagal menambahkan artikel blog'));
+          }
+        }else{
+          $this->addAlert(array('negative','Semua input harus terisi'));
+        }
+
+      }
+    }
+
+    public function editBlog($id=0){
+      $this->setCustomTitle('Edit Artikel');
+      $id = (int)$id;
+
+      if(isset($_POST['submit'])){
+
+        if( !empty($_POST['judul']) && !empty($_POST['deskripsi']) && !empty($_POST['status']) ){
+
+          $judul = $this->db()->real_escape_string($_POST['judul']);
+          $deskripsi = $this->db()->real_escape_string($_POST['deskripsi']);
+          $status = (int)$_POST['status'];
+
+          $qurs = "UPDATE toko_blog SET title = '$judul', description = '$deskripsi', status = $status WHERE id = $id";
+          $query = $this->db()->query($qurs);
+          if($query){
+            $this->addAlert(array('positive','Berhasil mengubah artikel blog'));
+          }else{
+            $this->addAlert(array('negative','Gagal mengubah artikel blog'));
+          }
+        }else{
+          $this->addAlert(array('negative','Semua input harus terisi'));
+        }
+
+      }
+
+      $queryHalaman = $this->db()->query("SELECT * FROM toko_blog WHERE id = $id");
+      if($queryHalaman->num_rows != 0){
+        $arr = array();
+        $arr = $queryHalaman->fetch_array();
+        $this->setSiteData($arr);
+      }else{
+        $this->addAlert(array('negative','Artikel blog tidak ditemukan'));
+      }
+
+    }
+
 }

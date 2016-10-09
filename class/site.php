@@ -41,6 +41,11 @@ class Site{
       }
       $this->addSidebar(array('Kontak',$isi));
     }
+
+    $queryWidget = $this->db()->query("SELECT * FROM toko_widget ORDER BY position ASC");
+    while($fetchWidget = $queryWidget->fetch_assoc()){
+      $this->addSidebar(array($fetchWidget['title'],$fetchWidget['content']));
+    }
   }
 
   public function getTotalPost(){
@@ -205,7 +210,7 @@ class Site{
   public static function getSlider(){
     $arr = array();
     $koneksi = new Koneksi();
-    $query = $query = $koneksi->db()->query("SELECT * FROM toko_slider WHERE active = 1 ORDER BY id ASC");
+    $query = $koneksi->db()->query("SELECT * FROM toko_slider WHERE active = 1 ORDER BY id ASC");
     $arr = array();
     while($fetch = $query->fetch_assoc()){
       $slider = array(
@@ -216,6 +221,26 @@ class Site{
         'gambar' => $fetch['gambar']
       );
       array_push($arr,$slider);
+    }
+    return $arr;
+  }
+
+  public static function getPageList(){
+    $arr = array();
+    $koneksi = new Koneksi();
+    $query = $koneksi->db()->query("SELECT * FROM toko_halaman WHERE status = 1 ORDER BY judul ASC");
+    while($fetch = $query->fetch_array()){
+      array_push($arr, $fetch);
+    }
+    return $arr;
+  }
+
+  public static function getBlogList(){
+    $arr = array();
+    $koneksi = new Koneksi();
+    $query = $koneksi->db()->query("SELECT * FROM toko_blog WHERE status = 1 ORDER BY id DESC LIMIT 5");
+    while($fetch = $query->fetch_array()){
+      array_push($arr, $fetch);
     }
     return $arr;
   }

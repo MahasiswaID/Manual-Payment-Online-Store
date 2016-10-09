@@ -1,6 +1,6 @@
-</div>
-</div>
-</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <footer id="footer"><!--Footer-->
@@ -10,27 +10,37 @@
 <div class="row">
   <div class="col-sm-4">
     <div class="single-widget">
-      <h2>Service</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#">Online Help</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Order Status</a></li>
-        <li><a href="#">Change Location</a></li>
-        <li><a href="#">FAQ’s</a></li>
-      </ul>
+			<?php
+				$pageList = Site::getPageList();
+				if( !empty($pageList) ){
+					echo "
+						<h2>Pages</h2>
+						<ul class='nav nav-pills nav-stacked'>
+					";
+					foreach ($pageList as $pl) {
+						echo "<li><a href='".base_url('page/'.$pl['slug'])."'>".safe_echo_html($pl['judul'])."</a></li>";
+					}
+					echo "</ul>";
+				}
+			?>
     </div>
   </div>
 
   <div class="col-sm-4">
     <div class="single-widget">
-      <h2>About Shopper</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#">Company Information</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Store Location</a></li>
-        <li><a href="#">Affillate Program</a></li>
-        <li><a href="#">Copyright</a></li>
-      </ul>
+			<?php
+				$blogList = Site::getBlogList();
+				if( !empty($blogList) ){
+					echo "
+						<h2>Last Posts</h2>
+						<ul class='nav nav-pills nav-stacked'>
+					";
+					foreach ($blogList as $bl) {
+						echo "<li><a href='".base_url('blog/'.$bl['slug'])."'>".safe_echo_html($bl['title'])."</a></li>";
+					}
+					echo "</ul>";
+				}
+			?>
     </div>
   </div>
   <div class="col-sm-4">
