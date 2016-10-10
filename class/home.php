@@ -47,6 +47,8 @@
         $arr = $query->fetch_array();
         $this->setSiteData($arr);
         $this->setCustomTitle(safe_echo_html($arr['title']));
+        //Tambah Hits
+        $this->db()->query("UPDATE toko_blog SET hits = '".($arr['hits']+1)."' WHERE slug = '$url'");
       }else{
         $this->addAlert(array('negative','Artikel tidak ditemukan'));
         $this->setCustomTitle('Artikel tidak ditemukan');

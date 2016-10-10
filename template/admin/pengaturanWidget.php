@@ -11,7 +11,8 @@
           <div class='title'>".$widget['position'].". ".safe_echo_html($judul)."</div>
           <div class='edit-button'>
             <div class='left'>
-              <a href=\"#!\">Edit</a>
+              <a href=\"#!\"><i class='edit icon'></i></a>
+              <a onclick='return confirm(\"Hapus widget ini?\")' href='".base_url('admin/deleteWidget/'.$widget['id'])."'><i class='trash icon'></i></a>
             </div>
             <div class='right'>
 
@@ -29,7 +30,7 @@
                 <textarea name='content' placeholder='Content' required>".safe_echo_input($widget['content'])."</textarea>
               </div>
               <div class='field'>
-                <button type='submit' name='ubah' class='ui button primary'>Tambah</button>
+                <button type='submit' name='ubah' class='ui button primary'>Ubah</button>
               </div>
             </form>
           </div>

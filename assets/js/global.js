@@ -2,7 +2,7 @@ $(".tombol-order").click(function(){
   $('#myModal').modal('show');
 });
 
-$(".kotak-widget .edit-button .left a").click(function(){
+$(".kotak-widget .edit-button .left a:first-child").click(function(){
   $(".kotak-widget .edit-section").slideUp(300);
   $(this).parents(".kotak-widget").children(".edit-section").slideDown(300);
 });

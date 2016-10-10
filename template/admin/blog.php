@@ -19,7 +19,7 @@
         echo "<tr>
           <td>".$no."</td>
           <td>".safe_echo_html($blog['title'])."</td>
-          <td>".safe_echo_html($blog['status'])."</td>
+          <td>".tombol_published($blog['status'])."</td>
           <td>".safe_echo_html($blog['publishedTime'])."</td>
           <td>".safe_echo_html($blog['hits'])."</td>
           <td>

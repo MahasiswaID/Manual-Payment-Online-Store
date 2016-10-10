@@ -70,10 +70,9 @@
 
 <div class='ui container'>
   <div class="ui inverted pointing menu">
-    <a class="<?php if($action=='index'){echo "active";} ?> item">
-      Home
-    </a>
+    <a href='<?php echo base_url('admin'); ?>' class="<?php if($action=='index'){echo "active";} ?> item">Dashboard</a>
     <a href='<?php echo base_url('admin/produk'); ?>' class="<?php if(stristr($action,'produk')){echo "active";} ?> item">Produk</a>
+    <a href='<?php echo base_url('admin/blog'); ?>' class="<?php if(stristr($action,'blog')){echo "active";} ?> item">Blog</a>
     <a href='<?php echo base_url('admin/page'); ?>' class="<?php if(stristr($action,'page')){echo "active";} ?> item">Halaman</a>
     <div class="ui dropdown link item">
       <span class="text">Pengaturan</span>
@@ -83,6 +82,7 @@
         <a class="item" href='<?php echo base_url('admin/pengaturanPembelian'); ?>'>Info Kontak</a>
         <a class="item" href='<?php echo base_url('admin/pengaturanslider'); ?>'>Slider</a>
         <a class="item" href='<?php echo base_url('admin/pengaturanTemplate'); ?>'>Template</a>
+        <a class="item" href='<?php echo base_url('admin/pengaturanWidget'); ?>'>Widget</a>
       </div>
     </div>
     <div class="right menu">

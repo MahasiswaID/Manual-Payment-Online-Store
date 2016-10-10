@@ -1,4 +1,3 @@
-/* Open Sans */
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -522,4 +521,15 @@ label {
     padding: 10px 10px 10px 10px;
     border-top: 1px solid #ccc;
     background: rgba(255, 255, 255, 0.57);
+}
+.ui.negative.message {
+    background: #F44336;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.fb-comments > span, .fb-comments > span > iframe{
+    width: 100% !important;
 }

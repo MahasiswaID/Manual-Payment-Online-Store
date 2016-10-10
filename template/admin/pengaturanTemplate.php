@@ -18,5 +18,10 @@
       <td>Footer ini berisi konten mulai dari 3 kolum footer dan copyright</td>
       <td><a href='<?php echo base_url('admin/editTemplate/footer'); ?>'><i class='edit icon'></i></a></td>
     </tr>
+    <tr>
+      <td>Style CSS</td>
+      <td>File ini berisi kode cascading style sheet dari website</td>
+      <td><a href='<?php echo base_url('admin/editTemplate/css'); ?>'><i class='edit icon'></i></a></td>
+    </tr>
   </tbody>
 </table>

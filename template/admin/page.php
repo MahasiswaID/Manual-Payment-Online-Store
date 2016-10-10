@@ -19,7 +19,7 @@
         echo "<tr>
           <td>".$no."</td>
           <td>".safe_echo_html($page['judul'])."</td>
-          <td>".safe_echo_html($page['status'])."</td>
+          <td>".tombol_published($page['status'])."</td>
           <td>".safe_echo_html($page['slug'])."</td>
           <td>".safe_echo_html($page['hits'])."</td>
           <td>

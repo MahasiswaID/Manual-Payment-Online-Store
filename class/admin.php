@@ -863,30 +863,49 @@ class Admin extends Site
       $this->setCustomTitle('Edit Template');
       if( !empty($fileName) ){
         $valid = 1;
-        if( $fileName != 'header' && $fileName != 'footer' ){
+        if( $fileName != 'header' && $fileName != 'footer' && $fileName!= 'css'){
           $fileName = '';
           $valid = 0;
           $this->addAlert(array('negative','File tidak boleh dibuka'));
         }
 
-        if($valid == 1){
-
+        if( $fileName == 'css' ){
           if( isset($_POST['submit']) ){
             $konten = "";
             if( !empty($_POST['isiFile']) ){
               $konten = $_POST['isiFile'];
             }
-            $fileBaru = fopen('template/'.$fileName.'.php','w') or die('File tidak dapat dibuka');
+            $fileBaru = fopen('assets/css/global.css','w') or die('File tidak dapat dibuka');
             fwrite($fileBaru,$konten);
             fclose($fileBaru);
             $this->addAlert(array('positive','Berhasil menyimpan file'));
           }
 
 
-          $file = fopen('template/'.$fileName.'.php','r') or die('File tidak dapat dibuka');
-          $this->setSiteData(fread($file,filesize('template/'.$fileName.'.php')));
+          $file = fopen('assets/css/global.css','r') or die('File tidak dapat dibuka');
+          $this->setSiteData(fread($file,filesize('assets/css/global.css')));
           fclose($file);
+        }else{
+          if($valid == 1){
+
+            if( isset($_POST['submit']) ){
+              $konten = "";
+              if( !empty($_POST['isiFile']) ){
+                $konten = $_POST['isiFile'];
+              }
+              $fileBaru = fopen('template/'.$fileName.'.php','w') or die('File tidak dapat dibuka');
+              fwrite($fileBaru,$konten);
+              fclose($fileBaru);
+              $this->addAlert(array('positive','Berhasil menyimpan file'));
+            }
+
+
+            $file = fopen('template/'.$fileName.'.php','r') or die('File tidak dapat dibuka');
+            $this->setSiteData(fread($file,filesize('template/'.$fileName.'.php')));
+            fclose($file);
+          }
         }
+
 
       }else{
         $this->addAlert(array('negative','File tidak ditemukan'));
@@ -969,6 +988,12 @@ class Admin extends Site
         $this->addAlert(array('negative','Artikel blog tidak ditemukan'));
       }
 
+    }
+
+    function deleteWidget($id=0){
+      $id = (int)$id;
+      $this->db()->query("DELETE FROM toko_widget WHERE id = '$id'");
+      die(header("Location:".base_url('admin/pengaturanWidget')));
     }
 
 }

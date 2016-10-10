@@ -1,4 +1,5 @@
 <?php
+  ini_set('memory_limit','-1');
   ob_start();
   session_start();
 
@@ -172,7 +173,7 @@
 
   //base url function
   function base_url($string=''){
-    return BASE_URL.$string;
+    return "//".$_SERVER['HTTP_HOST'].BASE_URL.$string;
   }
 
   function base_full($string=''){
@@ -337,6 +338,14 @@
       }
     }
     return $max_size;
+  }
+
+  function tombol_published($num){
+    if($num==1){
+      return "<button type='button' class='ui green button'>Published</button>";
+    }else{
+      return "<button type='button' class='ui red button'>Hidden</button>";
+    }
   }
 
   function parse_size($size){

@@ -77,8 +77,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> 0878-7121-7391</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> el.sifa85@gmail.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -108,11 +108,7 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i> Home</a></li>
 							</ul>
 						</div>
 					</div>
@@ -134,23 +130,27 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                <li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>
+                <li><a href="<?php echo base_url('page/cara-pemesanan'); ?>">Cara Pemesanan</a></li>
+								<li><a href="<?php echo base_url('page/testimonial'); ?>">Testimonial</a></li>
+								<!--<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                   <ul role="menu" class="sub-menu">
-                      <li><a href="shop.html">Products</a></li>
+                      <li><a href="/page/testimonial">Testimonial</a></li>
   										<li><a href="product-details.html">Product Details</a></li>
   										<li><a href="checkout.html">Checkout</a></li>
   										<li><a href="cart.html">Cart</a></li>
   										<li><a href="login.html">Login</a></li>
                   </ul>
-                </li>
+                </li>-->
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
-						</div>
+						<!--<div class="search_box pull-right">
+              <form method='GET'>
+  							<input type="text" placeholder="Search"/>
+              </form>
+						</div>-->
 					</div>
 				</div>
 			</div>
@@ -234,32 +234,8 @@
 						</div><!--/category-products-->
 
             <?php
-              /*if(!empty($site->getInfoProduk())){
-                $infoProduk = $site->getInfoProduk();
-                echo "<div class='sidebar-produk'>
-                  <div class='harga'>".toRupiah($infoProduk->getHarga())."</div>
-                  <a class='tombol-order' href='#!'>Order Sekarang</a>
-                </div>
-                <div class='kat-brand'>
-                  <table>
-                    <tbody>
-                      <tr><td>Brand</td><td>".safe_echo_html($infoProduk->getBrand())."</td></tr>
-                      <tr><td>Kategori</td><td>".safe_echo_html($infoProduk->getKategori())."</td></tr>
-                    </tbody>
-                  </table>
-                </div>";
-              }*/
               echo $site->getSidebar();
             ?>
-
-						<!--<div class="price-range">
-              <h2>Price Range</h2>
-              <div class="well text-center">
-              <input type="text" class="span2" value="" data-slider-min="<?php echo $infoProd['min']; ?>" data-slider-max="<?php echo $infoProd['max']; ?>" data-slider-step="5" data-slider-value="[<?php echo $infoProd['min']; ?>,<?php echo $infoProd['max']; ?>]" id="sl2" ><br />
-              <b class="pull-left"><?php echo toRupiah($infoProd['min']); ?></b> <b class="pull-right"><?php echo toRupiah($infoProd['max']); ?></b>
-            </div>
-						</div>-->
-
 					</div>
 				</div>
 
@@ -270,13 +246,3 @@
               echo $site->getAlert();
             }
           ?>
-
-    <!--<div class='ui container home-container'>
-      <div class='ui grid'>
-        <div class='four wide column'>
-          <div id='sidebar'>
-
-          </div>
-        </div>
-        <div class='twelve wide column'>
-        -->
